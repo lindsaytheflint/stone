@@ -1,0 +1,1 @@
+cmd_net/packet/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o net/packet/built-in.o net/packet/af_packet.o ; scripts/mod/modpost net/packet/built-in.o

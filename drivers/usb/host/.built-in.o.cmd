@@ -1,0 +1,1 @@
+cmd_drivers/usb/host/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/usb/host/built-in.o drivers/usb/host/pci-quirks.o drivers/usb/host/ehci-hcd.o ; scripts/mod/modpost drivers/usb/host/built-in.o

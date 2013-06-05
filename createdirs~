@@ -1,0 +1,12 @@
+mkdir ./drivers
+mkdir ./drivers/net
+mkdir ./drivers/net/wireless
+mkdir ./drivers/net/wireless/wcnss
+mkdir ./drivers/usb/otg
+mkdir ./drivers/cpufreq
+mkdir ./include
+mkdir ./include/linux
+mkdir ./arch
+mkdir ./arch/arm
+mkdir ./arch/arm/mach-msm
+

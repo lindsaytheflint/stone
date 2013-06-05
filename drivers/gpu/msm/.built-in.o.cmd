@@ -1,0 +1,1 @@
+cmd_drivers/gpu/msm/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/gpu/msm/built-in.o drivers/gpu/msm/msm_kgsl_core.o drivers/gpu/msm/msm_adreno.o drivers/gpu/msm/msm_z180.o ; scripts/mod/modpost drivers/gpu/msm/built-in.o

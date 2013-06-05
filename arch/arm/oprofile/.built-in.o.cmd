@@ -1,0 +1,1 @@
+cmd_arch/arm/oprofile/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o arch/arm/oprofile/built-in.o arch/arm/oprofile/oprofile.o ; scripts/mod/modpost arch/arm/oprofile/built-in.o

@@ -1,0 +1,1 @@
+cmd_drivers/usb/storage/ums-karma.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/usb/storage/ums-karma.o drivers/usb/storage/karma.o ; scripts/mod/modpost drivers/usb/storage/ums-karma.o

@@ -1,0 +1,1 @@
+cmd_sound/soc/msm/snd-soc-msm8960.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o sound/soc/msm/snd-soc-msm8960.o sound/soc/msm/msm8960.o sound/soc/msm/apq8064.o sound/soc/msm/msm8930.o sound/soc/msm/mpq8064.o ; scripts/mod/modpost sound/soc/msm/snd-soc-msm8960.o

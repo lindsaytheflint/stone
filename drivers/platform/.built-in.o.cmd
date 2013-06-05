@@ -1,0 +1,1 @@
+cmd_drivers/platform/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/platform/built-in.o drivers/platform/msm/built-in.o ; scripts/mod/modpost drivers/platform/built-in.o

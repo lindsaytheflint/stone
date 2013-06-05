@@ -1,0 +1,1 @@
+cmd_lib/xz/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o lib/xz/built-in.o lib/xz/xz_dec.o ; scripts/mod/modpost lib/xz/built-in.o

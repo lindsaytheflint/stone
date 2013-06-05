@@ -1,0 +1,1 @@
+cmd_drivers/usb/misc/mdm_bridge.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/usb/misc/mdm_bridge.o drivers/usb/misc/mdm_ctrl_bridge.o drivers/usb/misc/mdm_data_bridge.o ; scripts/mod/modpost drivers/usb/misc/mdm_bridge.o

@@ -1,0 +1,1 @@
+cmd_drivers/thermal/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/thermal/built-in.o drivers/thermal/thermal_sys.o drivers/thermal/msm8960_tsens.o drivers/thermal/pm8xxx-tm.o drivers/thermal/msm_thermal.o ; scripts/mod/modpost drivers/thermal/built-in.o

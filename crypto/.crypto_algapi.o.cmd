@@ -1,0 +1,1 @@
+cmd_crypto/crypto_algapi.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o crypto/crypto_algapi.o crypto/algapi.o crypto/scatterwalk.o crypto/proc.o ; scripts/mod/modpost crypto/crypto_algapi.o

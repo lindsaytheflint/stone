@@ -1,0 +1,1 @@
+cmd_lib/reed_solomon/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o lib/reed_solomon/built-in.o lib/reed_solomon/reed_solomon.o ; scripts/mod/modpost lib/reed_solomon/built-in.o

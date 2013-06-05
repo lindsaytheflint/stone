@@ -1,0 +1,1 @@
+cmd_drivers/staging/prima_legacy/built-in.o :=  rm -f drivers/staging/prima_legacy/built-in.o; /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ar rcsD drivers/staging/prima_legacy/built-in.o

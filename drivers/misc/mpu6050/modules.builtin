@@ -1,0 +1,3 @@
+kernel/drivers/misc/mpu6050/mpu6050.ko
+kernel/drivers/misc/mpu6050/timerirq_6050.ko
+kernel/drivers/misc/mpu6050/compass/inv_mpu_ami306_6050.ko

@@ -1,0 +1,8 @@
+kernel/drivers/input/rmi4/rmi_f09.ko
+kernel/drivers/input/rmi4/rmi_f1a.ko
+kernel/drivers/input/rmi4/rmi_f11.ko
+kernel/drivers/input/rmi4/rmi_f17.ko
+kernel/drivers/input/rmi4/rmi_f19.ko
+kernel/drivers/input/rmi4/rmi_f34.ko
+kernel/drivers/input/rmi4/rmi_f54.ko
+kernel/drivers/input/rmi4/rmi_dev.ko

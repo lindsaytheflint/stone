@@ -1,0 +1,9 @@
+menu "Sensors driver"
+
+config SENSORS_CM36283
+	bool "PS ALS CM36283 support"
+	default n
+	---help---
+	  ASUS SENSORS folder
+
+endmenu

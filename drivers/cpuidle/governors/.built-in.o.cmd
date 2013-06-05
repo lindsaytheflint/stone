@@ -1,0 +1,1 @@
+cmd_drivers/cpuidle/governors/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/cpuidle/governors/built-in.o drivers/cpuidle/governors/ladder.o drivers/cpuidle/governors/menu.o ; scripts/mod/modpost drivers/cpuidle/governors/built-in.o

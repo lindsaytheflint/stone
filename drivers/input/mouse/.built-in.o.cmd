@@ -1,0 +1,1 @@
+cmd_drivers/input/mouse/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/input/mouse/built-in.o drivers/input/mouse/psmouse.o ; scripts/mod/modpost drivers/input/mouse/built-in.o

@@ -1,0 +1,1 @@
+cmd_net/netfilter/netfilter.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o net/netfilter/netfilter.o net/netfilter/core.o net/netfilter/nf_log.o net/netfilter/nf_queue.o net/netfilter/nf_sockopt.o ; scripts/mod/modpost net/netfilter/netfilter.o

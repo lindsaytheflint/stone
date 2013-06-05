@@ -1,0 +1,1 @@
+cmd_sound/soc/codecs/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o sound/soc/codecs/built-in.o sound/soc/codecs/snd-soc-wcd9304.o sound/soc/codecs/snd-soc-wcd9310.o sound/soc/codecs/snd-soc-cs8427.o sound/soc/codecs/snd-soc-msm-stub.o ; scripts/mod/modpost sound/soc/codecs/built-in.o

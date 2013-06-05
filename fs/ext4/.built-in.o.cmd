@@ -1,0 +1,1 @@
+cmd_fs/ext4/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o fs/ext4/built-in.o fs/ext4/ext4.o ; scripts/mod/modpost fs/ext4/built-in.o

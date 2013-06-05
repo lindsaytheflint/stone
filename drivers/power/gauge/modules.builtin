@@ -1,0 +1,6 @@
+kernel/drivers/power/gauge/axc_gauge_a66.ko
+kernel/drivers/power/gauge/axc_gauge_p02.ko
+kernel/drivers/power/gauge/axc_gauge_dock.ko
+kernel/drivers/power/gauge/axc_gaugefactory.ko
+kernel/drivers/power/gauge/AXC_CapacityFilter.ko
+kernel/drivers/power/gauge/test_gauge.ko

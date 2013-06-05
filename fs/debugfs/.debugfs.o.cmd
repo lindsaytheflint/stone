@@ -1,0 +1,1 @@
+cmd_fs/debugfs/debugfs.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o fs/debugfs/debugfs.o fs/debugfs/inode.o fs/debugfs/file.o ; scripts/mod/modpost fs/debugfs/debugfs.o

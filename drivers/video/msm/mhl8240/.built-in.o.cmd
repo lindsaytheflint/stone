@@ -1,0 +1,1 @@
+cmd_drivers/video/msm/mhl8240/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/video/msm/mhl8240/built-in.o drivers/video/msm/mhl8240/sii8240drv.o ; scripts/mod/modpost drivers/video/msm/mhl8240/built-in.o

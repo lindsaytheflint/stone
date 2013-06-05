@@ -1,0 +1,1 @@
+cmd_drivers/input/serio/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/input/serio/built-in.o drivers/input/serio/serio.o drivers/input/serio/serport.o drivers/input/serio/libps2.o ; scripts/mod/modpost drivers/input/serio/built-in.o

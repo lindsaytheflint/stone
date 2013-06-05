@@ -1,0 +1,1 @@
+cmd_drivers/ieee802154/built-in.o :=  rm -f drivers/ieee802154/built-in.o; /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ar rcsD drivers/ieee802154/built-in.o

@@ -1,0 +1,1 @@
+cmd_drivers/gpu/ion/msm/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/gpu/ion/msm/built-in.o drivers/gpu/ion/msm/msm_ion.o drivers/gpu/ion/msm/ion_cp_common.o ; scripts/mod/modpost drivers/gpu/ion/msm/built-in.o

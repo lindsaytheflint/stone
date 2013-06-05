@@ -1,0 +1,1 @@
+cmd_crypto/crypto_blkcipher.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o crypto/crypto_blkcipher.o crypto/ablkcipher.o crypto/blkcipher.o ; scripts/mod/modpost crypto/crypto_blkcipher.o

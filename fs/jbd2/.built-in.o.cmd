@@ -1,0 +1,1 @@
+cmd_fs/jbd2/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o fs/jbd2/built-in.o fs/jbd2/jbd2.o ; scripts/mod/modpost fs/jbd2/built-in.o

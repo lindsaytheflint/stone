@@ -1,0 +1,1 @@
+cmd_drivers/char/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/char/built-in.o drivers/char/mem.o drivers/char/random.o drivers/char/misc.o drivers/char/hw_random/built-in.o drivers/char/msm_rotator.o drivers/char/diag/built-in.o ; scripts/mod/modpost drivers/char/built-in.o

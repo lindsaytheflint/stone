@@ -1,0 +1,1 @@
+cmd_drivers/power/fsm/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/power/fsm/built-in.o drivers/power/fsm/AXA_Charging_State.o drivers/power/fsm/AXC_Charging_FSM.o drivers/power/fsm/AXC_FSM_Stress_Tester.o ; scripts/mod/modpost drivers/power/fsm/built-in.o

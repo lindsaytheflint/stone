@@ -1,0 +1,1 @@
+cmd_drivers/slimbus/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/slimbus/built-in.o drivers/slimbus/slimbus.o drivers/slimbus/slim-msm-ctrl.o ; scripts/mod/modpost drivers/slimbus/built-in.o

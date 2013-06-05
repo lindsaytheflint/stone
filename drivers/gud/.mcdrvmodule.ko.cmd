@@ -1,0 +1,1 @@
+cmd_drivers/gud/mcdrvmodule.ko := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL -r  -T /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/scripts/module-common.lds --build-id  -o drivers/gud/mcdrvmodule.ko drivers/gud/mcdrvmodule.o drivers/gud/mcdrvmodule.mod.o

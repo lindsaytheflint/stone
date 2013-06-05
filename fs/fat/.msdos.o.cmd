@@ -1,0 +1,1 @@
+cmd_fs/fat/msdos.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o fs/fat/msdos.o fs/fat/namei_msdos.o ; scripts/mod/modpost fs/fat/msdos.o

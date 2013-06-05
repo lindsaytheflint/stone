@@ -1,0 +1,1 @@
+cmd_drivers/misc/mpu6050/compass/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/misc/mpu6050/compass/built-in.o drivers/misc/mpu6050/compass/inv_mpu_ami306_6050.o ; scripts/mod/modpost drivers/misc/mpu6050/compass/built-in.o

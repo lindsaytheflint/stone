@@ -1,0 +1,1 @@
+cmd_drivers/input/keyboard/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/input/keyboard/built-in.o drivers/input/keyboard/atkbd.o drivers/input/keyboard/gpio_keys.o drivers/input/keyboard/matrix_keypad.o ; scripts/mod/modpost drivers/input/keyboard/built-in.o

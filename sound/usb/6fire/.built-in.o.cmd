@@ -1,0 +1,1 @@
+cmd_sound/usb/6fire/built-in.o :=  rm -f sound/usb/6fire/built-in.o; /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ar rcsD sound/usb/6fire/built-in.o

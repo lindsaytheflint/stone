@@ -1,0 +1,1 @@
+cmd_drivers/mmc/host/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/mmc/host/built-in.o drivers/mmc/host/msm_sdcc.o drivers/mmc/host/msm_sdcc_dml.o ; scripts/mod/modpost drivers/mmc/host/built-in.o

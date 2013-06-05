@@ -1,0 +1,1 @@
+cmd_sound/usb/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o sound/usb/built-in.o sound/usb/snd-usb-audio.o sound/usb/snd-usbmidi-lib.o sound/usb/misc/built-in.o sound/usb/usx2y/built-in.o sound/usb/caiaq/built-in.o sound/usb/6fire/built-in.o ; scripts/mod/modpost sound/usb/built-in.o

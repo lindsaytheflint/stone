@@ -1,0 +1,1 @@
+cmd_drivers/usb/otg/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/usb/otg/built-in.o drivers/usb/otg/otg.o drivers/usb/otg/msm_otg.o ; scripts/mod/modpost drivers/usb/otg/built-in.o

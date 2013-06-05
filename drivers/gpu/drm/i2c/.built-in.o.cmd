@@ -1,0 +1,1 @@
+cmd_drivers/gpu/drm/i2c/built-in.o :=  rm -f drivers/gpu/drm/i2c/built-in.o; /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ar rcsD drivers/gpu/drm/i2c/built-in.o

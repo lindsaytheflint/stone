@@ -1,0 +1,101 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/kconfig-language.txt.
+#
+mainmenu "Linux/$ARCH $KERNELVERSION Kernel Configuration"
+
+menu "Stone Kernel tweaks"
+
+config CPU_OVERCLOCK
+	bool "CPU Overclock"
+	default n
+	help
+	 x
+
+config CPU_OVERCLOCK2
+	bool "Extreme"
+	depends on CPU_OVERCLOCK
+	default n
+	help
+	 x
+
+config CPU_LOWER_MINCLOCK
+	bool "Lower min CPU freq to 192khz"
+	default n
+	help
+	 x
+
+config CPU_VOLTAGE_TABLE
+	bool "CPU User Voltage Table (sysfs)"
+	default n
+	help
+	 x
+
+config CPU_LIMITDURINGBOOT
+	bool "Set CPU to 1458mhz at initialisation"
+	default y
+	help
+	 x
+
+config CPU_FIXLIMITS
+	bool "Fix CPU limiting"
+	default n
+	help
+	 x
+
+config CPU_PREVENT_MPDECISION
+	bool "Prevent MPDecision from changing CPU"
+	default n
+	help
+	 x
+	 
+config GPU_OVERCLOCK
+	bool "GPU Overclock"
+	default n
+	help
+	 x
+
+config GPU_SYSFS
+	bool "GPU freq sysfs interface"
+	default n
+	help
+	 x
+
+config GPU_UNDERVOLT
+	bool "GPU Undervolt"
+	default n
+	help
+	 x
+
+config GPU_LOWER_NORMALFREQ
+	bool "GPU lower normal freq from 400 to 128"
+	default n
+	help
+	 x
+
+config LCD_UNDERVOLT
+	bool "LCD Undervolt"
+	default n
+	help
+	 x
+	 
+config INCREASE_STORAGE_READAHEAD
+	bool "Increase storage min/max read-ahead values"
+	default n
+	help
+	 x
+
+config FORCE_FAST_CHARGE
+	bool "Force AC charge mode at will"
+	default n
+	help
+	 A simple sysfs interface to force adapters that
+	 are detected as USB to charge as AC. 
+
+endmenu
+
+config SRCARCH
+	string
+	option env="SRCARCH"
+
+source "arch/$SRCARCH/Kconfig"

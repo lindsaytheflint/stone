@@ -1,0 +1,1 @@
+cmd_drivers/usb/mon/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/usb/mon/built-in.o drivers/usb/mon/usbmon.o ; scripts/mod/modpost drivers/usb/mon/built-in.o

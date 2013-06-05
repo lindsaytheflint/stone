@@ -1,0 +1,1 @@
+cmd_drivers/video/msm/vidc/vidc_vdec.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/video/msm/vidc/vidc_vdec.o drivers/video/msm/vidc/common/dec/vdec.o ; scripts/mod/modpost drivers/video/msm/vidc/vidc_vdec.o

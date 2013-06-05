@@ -1,0 +1,1 @@
+cmd_sound/soc/codecs/snd-soc-cs8427.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o sound/soc/codecs/snd-soc-cs8427.o sound/soc/codecs/cs8427.o ; scripts/mod/modpost sound/soc/codecs/snd-soc-cs8427.o

@@ -1,0 +1,1 @@
+cmd_drivers/usb/gadget/g_android.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/usb/gadget/g_android.o drivers/usb/gadget/android.o ; scripts/mod/modpost drivers/usb/gadget/g_android.o

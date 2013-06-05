@@ -1,0 +1,1 @@
+cmd_drivers/power/util/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/power/util/built-in.o drivers/power/util/AXC_DoitLater_OneShotWorker.o drivers/power/util/AXC_DoitLaterFactory.o drivers/power/util/AXC_FeedingFileInputTest.o ; scripts/mod/modpost drivers/power/util/built-in.o

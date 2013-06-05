@@ -1,0 +1,1 @@
+cmd_drivers/hid/hid.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/hid/hid.o drivers/hid/hid-debug.o drivers/hid/hid-core.o drivers/hid/hid-input.o ; scripts/mod/modpost drivers/hid/hid.o

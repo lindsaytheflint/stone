@@ -1,0 +1,1 @@
+cmd_net/bluetooth/hidp/hidp.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o net/bluetooth/hidp/hidp.o net/bluetooth/hidp/core.o net/bluetooth/hidp/sock.o ; scripts/mod/modpost net/bluetooth/hidp/hidp.o

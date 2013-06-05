@@ -1,0 +1,6 @@
+kernel/drivers/leds/led-class.ko
+kernel/drivers/leds/leds-pm8xxx.ko
+kernel/drivers/leds/ledtrig-heartbeat.ko
+kernel/drivers/leds/a68_backlight.ko
+kernel/drivers/leds/p03_scaler_update.ko
+kernel/drivers/leds/p03_scaler_info.ko

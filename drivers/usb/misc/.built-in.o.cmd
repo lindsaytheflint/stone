@@ -1,0 +1,1 @@
+cmd_drivers/usb/misc/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/usb/misc/built-in.o drivers/usb/misc/ehset.o drivers/usb/misc/diag_bridge.o drivers/usb/misc/mdm_bridge.o drivers/usb/misc/ks_bridge.o ; scripts/mod/modpost drivers/usb/misc/built-in.o

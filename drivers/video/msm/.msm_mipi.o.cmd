@@ -1,0 +1,1 @@
+cmd_drivers/video/msm/msm_mipi.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/video/msm/msm_mipi.o drivers/video/msm/mipi_dsi.o drivers/video/msm/mipi_dsi_host.o ; scripts/mod/modpost drivers/video/msm/msm_mipi.o

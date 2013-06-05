@@ -1,0 +1,1 @@
+cmd_fs/nfs_common/nfs_acl.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o fs/nfs_common/nfs_acl.o fs/nfs_common/nfsacl.o ; scripts/mod/modpost fs/nfs_common/nfs_acl.o

@@ -1,0 +1,1 @@
+cmd_drivers/hwmon/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/hwmon/built-in.o drivers/hwmon/hwmon.o drivers/hwmon/pm8xxx-adc.o drivers/hwmon/pm8xxx-adc-scale.o drivers/hwmon/epm_adc.o ; scripts/mod/modpost drivers/hwmon/built-in.o

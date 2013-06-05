@@ -1,0 +1,1 @@
+cmd_drivers/iommu/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/iommu/built-in.o drivers/iommu/iommu.o drivers/iommu/msm_iommu.o drivers/iommu/msm_iommu_dev.o ; scripts/mod/modpost drivers/iommu/built-in.o

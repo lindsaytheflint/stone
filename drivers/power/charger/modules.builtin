@@ -1,0 +1,3 @@
+kernel/drivers/power/charger/axc_chargerfactory.ko
+kernel/drivers/power/charger/axc_PM8921Charger.ko
+kernel/drivers/power/charger/axc_DummyCharger.ko

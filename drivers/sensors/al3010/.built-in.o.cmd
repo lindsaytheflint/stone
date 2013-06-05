@@ -1,0 +1,1 @@
+cmd_drivers/sensors/al3010/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/sensors/al3010/built-in.o drivers/sensors/al3010/al3010.o ; scripts/mod/modpost drivers/sensors/al3010/built-in.o

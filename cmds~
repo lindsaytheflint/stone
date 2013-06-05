@@ -1,0 +1,4 @@
+find . -name "*.c" -exec grep -l "init_clock_sources" {} +
+find . -iname "*.c" -type -f -mtime -1 -print
+
+

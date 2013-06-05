@@ -1,0 +1,1 @@
+cmd_block/partitions/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o block/partitions/built-in.o block/partitions/check.o block/partitions/msdos.o block/partitions/efi.o ; scripts/mod/modpost block/partitions/built-in.o

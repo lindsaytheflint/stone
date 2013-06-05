@@ -1,0 +1,1 @@
+cmd_crypto/cryptomgr.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o crypto/cryptomgr.o crypto/algboss.o crypto/testmgr.o ; scripts/mod/modpost crypto/cryptomgr.o

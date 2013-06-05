@@ -1,0 +1,1 @@
+cmd_sound/usb/snd-usbmidi-lib.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o sound/usb/snd-usbmidi-lib.o sound/usb/midi.o ; scripts/mod/modpost sound/usb/snd-usbmidi-lib.o

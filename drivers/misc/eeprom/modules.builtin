@@ -1,0 +1,3 @@
+kernel/drivers/misc/eeprom/microp_nuvoton.ko
+kernel/drivers/misc/eeprom/AX_microp_api.ko
+kernel/drivers/misc/eeprom/microp_notify.ko

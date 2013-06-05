@@ -1,0 +1,12 @@
+mkdir ./lfchanges/drivers
+mkdir ./lfchanges/drivers/net
+mkdir ./lfchanges/drivers/net/wireless
+mkdir ./lfchanges/drivers/net/wireless/wcnss
+mkdir ./lfchanges/drivers/usb/otg
+mkdir ./lfchanges/drivers/cpufreq
+mkdir ./lfchanges/include
+mkdir ./lfchanges/include/linux
+mkdir ./lfchanges/arch
+mkdir ./lfchanges/arch/arm
+mkdir ./lfchanges/arch/arm/mach-msm
+

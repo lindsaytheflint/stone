@@ -1,0 +1,1 @@
+cmd_drivers/staging/qcache/qcache.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/staging/qcache/qcache.o drivers/staging/qcache/qcache-main.o drivers/staging/qcache/tmem.o drivers/staging/qcache/fmem.o ; scripts/mod/modpost drivers/staging/qcache/qcache.o

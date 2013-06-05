@@ -1,0 +1,1 @@
+cmd_drivers/hid/built-in.o :=  /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/hid/built-in.o drivers/hid/hid.o drivers/hid/hid-apple.o drivers/hid/hid-magicmouse.o drivers/hid/hid-microsoft.o drivers/hid/hid-sony.o drivers/hid/usbhid/built-in.o ; scripts/mod/modpost drivers/hid/built-in.o

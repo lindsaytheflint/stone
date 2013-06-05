@@ -1,0 +1,1 @@
+cmd_drivers/gud/mcdrvmodule.o := /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-ld -EL    -r -o drivers/gud/mcdrvmodule.o drivers/gud/mobicore_driver/logging.o drivers/gud/mobicore_driver/main.o ; scripts/mod/modpost drivers/gud/mcdrvmodule.o
