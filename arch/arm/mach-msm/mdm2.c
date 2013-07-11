@@ -49,6 +49,22 @@ static int power_on_count;
 static int hsic_peripheral_status;
 static DEFINE_MUTEX(hsic_status_lock);
 
+//ASUS_BSP Johnny +++ return listen_port when modem restart 
+struct port_link
+{
+        int port;
+        int read;
+        int deleting;
+        struct port_link* next;
+};
+extern struct port_link syn_firewall_port_link_head;
+extern int lp_modem_restart;
+extern struct completion listen_event;
+extern spinlock_t listen_port_lock;
+struct port_link *p=&syn_firewall_port_link_head;
+struct port_link *prev;
+//ASUS_BSP ---
+
 static void mdm_peripheral_connect(struct mdm_modem_drv *mdm_drv)
 {
 	if (!mdm_drv->pdata->peripheral_platform_device)
@@ -282,9 +298,42 @@ static struct platform_driver mdm_modem_driver = {
 		.owner = THIS_MODULE
 	},
 };
+//ASUS_BSP Johnny +++ return listen_port when modem restart
+static int listen_port_notifier_cb(struct notifier_block *this,
+                                        unsigned long code, void *_cmd)
+{
+switch (code) {
+        case SUBSYS_BEFORE_SHUTDOWN:
+
+          spin_lock_bh(&listen_port_lock);
+          prev=p;
+          while(prev->next!=NULL)
+              {
+
+              printk("[SYN] start set read to 0\n");
+
+              prev=prev->next;
+              if(1==prev->read)
+                    prev->read=0;
+              }
+
+          printk("[SYN] lp_modem_restart=1\n");
+          lp_modem_restart=1;
+          spin_unlock_bh(&listen_port_lock);
+          complete(&listen_event);
+
+        break;
+}
+        return NOTIFY_DONE;
+}
+static struct notifier_block lp_nb = {
+        .notifier_call = listen_port_notifier_cb,
+};
+//ASUS_BSP ---
 
 static int __init mdm_modem_init(void)
 {
+        subsys_notif_register_notifier("external_modem", &lp_nb);//ASUS_BSP Johnny +++ return listen_port when modem restart
 	return platform_driver_probe(&mdm_modem_driver, mdm_modem_probe);
 }
 

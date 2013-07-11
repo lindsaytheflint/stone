@@ -66,11 +66,20 @@ static int set_cpu_freq(struct cpufreq_policy *policy, unsigned int new_freq)
 {
 	int ret = 0;
 	struct cpufreq_freqs freqs;
-#ifdef CONFIG_CPU_FIXLIMITS
-	struct cpu_freq *limit = &per_cpu(cpu_freq_info, 0);
-#else
 	struct cpu_freq *limit = &per_cpu(cpu_freq_info, policy->cpu);
+#ifdef CONFIG_CPU_FIXLIMITS
+	if (policy->cpu > 0) {
+//		struct cpu_freq *limitMain = &per_cpu(cpu_freq_info, 0);
+//		limit->allowed_max=limitMain->allowed_max;
+//		limit->max=limitMain->max;
+//		limit->limits_init=limitMain->limits_init;
+		int curfreq=acpuclk_get_rate(0);
+		if (new_freq > curfreq) {
+			new_freq = curfreq;
+		}
+	}
 #endif
+
 	if (limit->limits_init) {
 		if (new_freq > limit->allowed_max) {
 			new_freq = limit->allowed_max;
@@ -200,7 +209,6 @@ static inline int msm_cpufreq_limits_init(void)
 	uint32_t max = 0;
 	struct cpu_freq *limit = NULL;
 
-
 	for_each_possible_cpu(cpu) {
 		limit = &per_cpu(cpu_freq_info, cpu);
 		table = cpufreq_frequency_get_table(cpu);
@@ -227,11 +235,8 @@ static inline int msm_cpufreq_limits_init(void)
 
 int msm_cpufreq_set_freq_limits(uint32_t cpu, uint32_t min, uint32_t max)
 {
-#ifdef CONFIG_CPU_FIXLIMITS
-	struct cpu_freq *limit = &per_cpu(cpu_freq_info, 0);
-#else
 	struct cpu_freq *limit = &per_cpu(cpu_freq_info, cpu);
-#endif
+
 	if (!limit->limits_init)
 		msm_cpufreq_limits_init();
 
@@ -252,6 +257,19 @@ int msm_cpufreq_set_freq_limits(uint32_t cpu, uint32_t min, uint32_t max)
 			__func__, cpu,
 			limit->allowed_min, limit->allowed_max);
 
+//#ifdef CONFIG_CPU_FIXLIMITS
+//	if (cpu == 0)
+//	{
+//		for_each_possible_cpu(cpu) {
+//			limit = &per_cpu(cpu_freq_info, cpu);
+//			limit->allowed_min = min;
+//			limit->allowed_max = max;
+//			limit->min = min;
+//			limit->max = max;
+//			limit->limits_init = 1;
+//		}
+//	}
+//#endif
 	return 0;
 }
 EXPORT_SYMBOL(msm_cpufreq_set_freq_limits);

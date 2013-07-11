@@ -149,7 +149,7 @@ static int g_usb_boot = MSM_OTG_USB_BOOT_INIT;
 
 #define USB_PHY_VDD_DIG_VOL_NONE	0 /*uV */
 #define USB_PHY_VDD_DIG_VOL_MIN	1045000 /* uV */
-#define USB_PHY_VDD_DIG_VOL_MAX	1320000 /* uV */
+#define USB_PHY_VDD_DIG_VOL_MAX	1420000 /* uV */ //LF: 1320000
 
 static DECLARE_COMPLETION(pmic_vbus_init);
 static struct msm_otg *the_msm_otg;
@@ -166,7 +166,7 @@ enum asus_otg_state {
 	ASUS_OTG_CARKIT,//check IRQ to make sure USB is ready
 	ASUS_OTG_HOST,
 };
-static int g_otg_mode = ASUS_OTG_NONE;
+static int g_otg_mode = ASUS_OTG_HOST; //LF: ASUS_OTG_NONE
 static int g_carkit_state = 0;
 static int g_charger_ready = 0;
 
@@ -1676,7 +1676,6 @@ static void msm_otg_notify_charger(struct msm_otg *motg, unsigned mA)
 		motg->chg_type == USB_ACA_C_CHARGER) &&
 			mA > IDEV_ACA_CHG_LIMIT)
 		mA = IDEV_ACA_CHG_LIMIT;
-
 	//ASUS_BSP+++ "[USB][NA][Spec] Add ASUS charger mode support"
 	#ifndef CONFIG_BATTERY_ASUS
 	if (msm_otg_notify_chg_type(motg))
@@ -1708,7 +1707,6 @@ static void msm_otg_notify_charger(struct msm_otg *motg, unsigned mA)
 	//ASUS_BSP+++ "[USB][NA][Spec] Add ASUS charger mode support"
 	#ifndef CONFIG_CHARGER_ASUS
 	dev_info(motg->phy.dev, "Avail curr from USB = %u\n", mA);
-
 	/*
 	 *  Use Power Supply API if supported, otherwise fallback
 	 *  to legacy pm8921 API.

@@ -1232,7 +1232,7 @@ void setChgLimitThermalRuleDrawCurrent(void)
 		}
 	}
 	
-	enableAICL();
+	//enableAICL();
 
 }
 #endif//#ifndef ASUS_FACTORY_BUILD
@@ -1607,6 +1607,43 @@ static bool AXC_Smb346_Charger_IsCharegrPlugin(AXI_Charger *apCharger)
 	return (this->type != NO_CHARGER_TYPE);
 #endif
 }
+
+//Eason show temp limit +++
+#define InterruptRegisterA__smb346_CMD_Table  18  //Interrupt Register A : 0x35h
+int showSmb346TempLimitReason(void)
+{
+	int reg35_value;
+	int HotTempHardLimitStatus;//S35[6] 
+	int ColdTempHardLimitStatus;//S35[4] 
+	int HotTempSoftLimitStatus;//S35[2] 
+	int ColdTempSoftLimitStatus;//S35[0] 
+	int limitStatus = 0;
+
+	reg35_value = smb346_read_table(InterruptRegisterA__smb346_CMD_Table);
+	printk("[BAT][smb346]TempLimitReason:0x%02X\n",reg35_value);
+	
+	HotTempHardLimitStatus = reg35_value & 64;
+	ColdTempHardLimitStatus = reg35_value & 16;
+	HotTempSoftLimitStatus = reg35_value &  4;
+	ColdTempSoftLimitStatus = reg35_value & 1;
+
+	if( 16 == ColdTempHardLimitStatus)
+	{
+		limitStatus = 1;
+	}else if(1 == ColdTempSoftLimitStatus)
+	{
+		limitStatus = 2;
+	}else if( 64 == HotTempHardLimitStatus)	
+	{
+		limitStatus = 3;
+	}else if( 4 == HotTempSoftLimitStatus)
+	{
+		limitStatus = 4;
+	}
+
+	return limitStatus;
+}
+//Eason show temp limit ---
 
 //Eason judge smb346 full +++
 bool smb346_IsFull(void)

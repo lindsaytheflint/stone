@@ -10,7 +10,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 extern unsigned int PRINTK_BUFFER;
-#define PRINTK_BUFFER_SIZE      (0x00100000)
+extern unsigned int RTB_BUFFER;
+#define PRINTK_BUFFER_SIZE      (0x00200000)
 
 #define PRINTK_BUFFER_MAGIC     (0xFEEDBEEF)
 #define PRINTK_BUFFER_SLOT_SIZE (0x00040000)
@@ -188,7 +189,7 @@ extern unsigned int PRINTK_BUFFER;
 ////                  Eventlog mask mechanism
 /////////////////////////////////////////////////////////////////////////////////////////////
 #define ASUS_EVTLOG_PATH "/sdcard/asus_log/ASUSEvtlog"
-#define ASUS_EVTLOG_STR_MAXLEN (192)
+#define ASUS_EVTLOG_STR_MAXLEN (256)
 #define ASUS_EVTLOG_MAX_ITEM (20)
 
 void save_all_thread_info(void);

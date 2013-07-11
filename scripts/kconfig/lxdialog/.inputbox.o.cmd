@@ -1,4 +1,4 @@
-cmd_scripts/kconfig/lxdialog/inputbox.o := gcc -Wp,-MD,scripts/kconfig/lxdialog/.inputbox.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer    -DCURSES_LOC="<ncurses.h>" -DLOCALE   -c -o scripts/kconfig/lxdialog/inputbox.o scripts/kconfig/lxdialog/inputbox.c
+cmd_scripts/kconfig/lxdialog/inputbox.o := gcc -Wp,-MD,scripts/kconfig/lxdialog/.inputbox.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer    -DCURSES_LOC="<ncurses.h>" -DLOCALE   -c -o scripts/kconfig/lxdialog/inputbox.o scripts/kconfig/lxdialog/inputbox.c
 
 source_scripts/kconfig/lxdialog/inputbox.o := scripts/kconfig/lxdialog/inputbox.c
 

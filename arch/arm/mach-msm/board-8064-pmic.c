@@ -387,7 +387,11 @@ apq8064_pm8921_chg_pdata __devinitdata = {
   * CHG_IBAT_SAFE] Besides, it is also limited by usb_ma_table[] if the charger is usb type.
   */
 #ifdef CONFIG_BATTERY_ASUS
+ #ifdef CONFIG_FORCE_FAST_CHARGE
+	.max_bat_chg_current	= 1400,
+  #else
 	.max_bat_chg_current	= 1200,
+ #endif
 #else
 	.max_bat_chg_current	= 1100,
 #endif /* CONFIG_BATTERY_ASUS */

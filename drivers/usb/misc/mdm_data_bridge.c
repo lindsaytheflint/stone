@@ -163,11 +163,8 @@ static void gdun_tty_close(struct tty_struct *tty, struct file *f)
 	is_open_asus = false;
 	gdun_tty = NULL;
 	pr_debug("%s: open asus %d usb %d\n", __func__, is_open_asus, is_open_usb);
-	if (!is_bridge_open()) {
-		data_bridge_close_asus(DUN_DATA_ID);
-		ctrl_bridge_close_asus(DUN_DATA_ID);
-	}
-
+	ctrl_bridge_close_asus(DUN_DATA_ID);
+	data_bridge_close_asus(DUN_DATA_ID);
 	return;
 }
 
@@ -380,7 +377,7 @@ static void data_bridge_process_rx(struct work_struct *work)
 	}
 #endif
 // ASUS_BSP--- Wenli "tty device for AT command"
-	if (!brdg || !brdg->ops.send_pkt || rx_halted(dev))
+	if (!brdg || !brdg->ops.send_pkt || rx_halted(dev) || !is_open_usb)
 		return;
 
 	while (!rx_throttled(brdg) && (skb = skb_dequeue(&dev->rx_done))) {
@@ -1242,6 +1239,7 @@ static void bridge_disconnect(struct usb_interface *intf)
 	struct list_head	*head;
 	struct urb		*rx_urb;
 	unsigned long		flags;
+	struct sk_buff		*skb;
 
 	if (!dev) {
 		err("%s: data device not found\n", __func__);
@@ -1257,18 +1255,21 @@ static void bridge_disconnect(struct usb_interface *intf)
 	cancel_work_sync(&dev->process_rx_w);
 	cancel_work_sync(&dev->kevent);
 
+	usb_unlink_anchored_urbs(&dev->tx_active);
+	usb_unlink_anchored_urbs(&dev->rx_active);
+	usb_unlink_anchored_urbs(&dev->delayed);
+
 	/*free rx urbs*/
 	head = &dev->rx_idle;
 	spin_lock_irqsave(&dev->rx_done.lock, flags);
+	while ((skb = __skb_dequeue(&dev->rx_done)))
+		dev_kfree_skb_any(skb);
 	while (!list_empty(head)) {
 		rx_urb = list_entry(head->next, struct urb, urb_list);
 		list_del(&rx_urb->urb_list);
 		usb_free_urb(rx_urb);
 	}
 	spin_unlock_irqrestore(&dev->rx_done.lock, flags);
-
-	usb_put_dev(dev->udev);
-	kfree(dev);
 // ASUS_BSP+++ Wenli "tty device for AT command"
 #ifndef DISABLE_ASUS_DUN
 	if (dev->id == DUN_DATA_ID) {
@@ -1277,6 +1278,8 @@ static void bridge_disconnect(struct usb_interface *intf)
 	}
 #endif
 // ASUS_BSP--- Wenli "tty device for AT command"
+	usb_put_dev(dev->udev);
+	kfree(dev);
 }
 
 // ASUS_BSP+++ Wenli "tty device for AT command"
@@ -1339,6 +1342,7 @@ static void data_bridge_process_rx_asus(struct work_struct *work)
 		info->rx_done_sent = get_timestamp();
 		/* hand off sk_buff to client,they'll need to free it */
 		retval = gdun_rx_string(skb);
+		dev_kfree_skb_any(skb);
 		if (retval < 0) {
 			dev->rx_throttled_cnt++;
 			break;
@@ -1448,17 +1452,12 @@ static void data_bridge_close_asus(unsigned int id)
 		return;
 
 	dev_dbg(&dev->intf->dev, "%s:\n", __func__);
-	is_open_asus = false;
-	if (!is_bridge_open()) {
-		usb_unlink_anchored_urbs(&dev->tx_active);
-		usb_unlink_anchored_urbs(&dev->rx_active);
-		usb_unlink_anchored_urbs(&dev->delayed);
 
-		spin_lock_irqsave(&dev->rx_done.lock, flags);
-		while ((skb = __skb_dequeue(&dev->rx_done)))
-			dev_kfree_skb_any(skb);
-		spin_unlock_irqrestore(&dev->rx_done.lock, flags);
-	}
+	spin_lock_irqsave(&dev->rx_done.lock, flags);
+	while ((skb = __skb_dequeue(&dev->rx_done)))
+		dev_kfree_skb_any(skb);
+	spin_unlock_irqrestore(&dev->rx_done.lock, flags);
+	is_open_asus = false;
 }
 
 static int data_bridge_open_asus(unsigned int ch_id)

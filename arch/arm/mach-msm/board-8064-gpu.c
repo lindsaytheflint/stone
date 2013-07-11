@@ -96,8 +96,11 @@ static struct msm_bus_vectors grp3d_nominal_high_vectors[] = {
 		.src = MSM_BUS_MASTER_GRAPHICS_3D,
 		.dst = MSM_BUS_SLAVE_EBI_CH0,
 		.ab = 0,
-#ifdef CONFIG_GPU_OVERCLOCK //LF
-		.ib = KGSL_CONVERT_TO_MBPS(4264),
+//#ifdef CONFIG_GPU_OVERCLOCK //LF
+//		.ib = KGSL_CONVERT_TO_MBPS(4264),
+//#else
+#ifdef CONFIG_GPU_LOWER_NORMALFREQ //LF
+		.ib = KGSL_CONVERT_TO_MBPS(2000),
 #else
 		.ib = KGSL_CONVERT_TO_MBPS(2656),
 #endif  //LF
@@ -106,8 +109,11 @@ static struct msm_bus_vectors grp3d_nominal_high_vectors[] = {
 		.src = MSM_BUS_MASTER_GRAPHICS_3D_PORT1,
 		.dst = MSM_BUS_SLAVE_EBI_CH0,
 		.ab = 0,
-#ifdef CONFIG_GPU_OVERCLOCK //LF
-		.ib = KGSL_CONVERT_TO_MBPS(4264),
+//#ifdef CONFIG_GPU_OVERCLOCK //LF
+//		.ib = KGSL_CONVERT_TO_MBPS(4264),
+//#else
+#ifdef CONFIG_GPU_LOWER_NORMALFREQ //LF
+		.ib = KGSL_CONVERT_TO_MBPS(2000),
 #else
 		.ib = KGSL_CONVERT_TO_MBPS(2656),
 #endif  //LF
@@ -207,14 +213,54 @@ static struct kgsl_device_iommu_data kgsl_3d0_iommu_data[] = {
 	},
 };
 
+#ifdef CONFIG_POWERSAVER
+static struct kgsl_device_platform_data kgsl_3d0_pdata = {
+	.pwrlevel = {
+		{
+			.gpu_freq = 266667000,
+			.bus_freq = 2,
+			.io_fraction = 0,
+		},
+		{
+			.gpu_freq = 128000000,
+			.bus_freq = 1,
+			.io_fraction = 33,
+		},
+		{
+			.gpu_freq = 27000000,
+			.bus_freq = 0,
+			.io_fraction = 100,
+		},
+	},
+	.init_level = 1,
+	.num_levels = 3,
+	.set_grp_async = NULL,
+	.idle_timeout = HZ/10,
+	.nap_allowed = true,
+	.strtstp_sleepwake = true,
+	.clk_map = KGSL_CLK_CORE | KGSL_CLK_IFACE | KGSL_CLK_MEM_IFACE,
+#ifdef CONFIG_MSM_BUS_SCALING
+	.bus_scale_table = &grp3d_bus_scale_pdata,
+#endif
+	.iommu_data = kgsl_3d0_iommu_data,
+	.iommu_count = ARRAY_SIZE(kgsl_3d0_iommu_data),
+#ifdef CONFIG_MSM_DCVS
+	.core_info = &grp3d_core_info,
+#endif
+};
+#else
 static struct kgsl_device_platform_data kgsl_3d0_pdata = {
 	.pwrlevel = {
 		{
 #ifdef CONFIG_GPU_OVERCLOCK //LF
-			.gpu_freq = 487500000,
+//			.gpu_freq = 487500000,
+//			.gpu_freq = 500000000,
+			.gpu_freq = 533333000,
 			.bus_freq = 4,
 			.io_fraction = 0,
+//		},
 #else
+//		{
 			.gpu_freq = 400000000,
 			.bus_freq = 4,
 			.io_fraction = 0,
@@ -223,7 +269,7 @@ static struct kgsl_device_platform_data kgsl_3d0_pdata = {
 		{
 #ifdef CONFIG_GPU_LOWER_NORMALFREQ //LF
 //			.gpu_freq = 325000000,
-			.gpu_freq = 128000000, //400000000,
+			.gpu_freq = 200000000, //128000000,
 			.bus_freq = 3,
 			.io_fraction = 0,
 #else
@@ -249,7 +295,11 @@ static struct kgsl_device_platform_data kgsl_3d0_pdata = {
 		},
 	},
 	.init_level = 1,
+//#ifdef CONFIG_GPU_OVERCLOCK //LF
+//	.num_levels = 6,
+//#else
 	.num_levels = 5,
+//#endif
 	.set_grp_async = NULL,
 	.idle_timeout = HZ/10,
 	.nap_allowed = true,
@@ -264,6 +314,8 @@ static struct kgsl_device_platform_data kgsl_3d0_pdata = {
 	.core_info = &grp3d_core_info,
 #endif
 };
+#endif //# CONFIG_POWERSAVER
+
 
 struct platform_device device_kgsl_3d0 = {
 	.name = "kgsl-3d0",
@@ -274,6 +326,11 @@ struct platform_device device_kgsl_3d0 = {
 		.platform_data = &kgsl_3d0_pdata,
 	},
 };
+
+//void SetMAXGPUFreq(unsigned long freq) //LF: 
+//{
+//  kgsl_3d0_pdata.pwrlevel[0].gpu_freq = freq;
+//}
 
 void __init apq8064_init_gpu(void)
 {

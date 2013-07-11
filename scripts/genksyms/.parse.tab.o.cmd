@@ -1,4 +1,4 @@
-cmd_scripts/genksyms/parse.tab.o := gcc -Wp,-MD,scripts/genksyms/.parse.tab.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer     -Iscripts/genksyms -c -o scripts/genksyms/parse.tab.o scripts/genksyms/parse.tab.c
+cmd_scripts/genksyms/parse.tab.o := gcc -Wp,-MD,scripts/genksyms/.parse.tab.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer     -Iscripts/genksyms -c -o scripts/genksyms/parse.tab.o scripts/genksyms/parse.tab.c
 
 source_scripts/genksyms/parse.tab.o := scripts/genksyms/parse.tab.c
 

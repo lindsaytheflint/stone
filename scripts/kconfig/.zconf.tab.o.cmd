@@ -1,4 +1,4 @@
-cmd_scripts/kconfig/zconf.tab.o := gcc -Wp,-MD,scripts/kconfig/.zconf.tab.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer    -DCURSES_LOC="<ncurses.h>" -DLOCALE  -Iscripts/kconfig -c -o scripts/kconfig/zconf.tab.o scripts/kconfig/zconf.tab.c
+cmd_scripts/kconfig/zconf.tab.o := gcc -Wp,-MD,scripts/kconfig/.zconf.tab.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer    -DCURSES_LOC="<ncurses.h>" -DLOCALE  -Iscripts/kconfig -c -o scripts/kconfig/zconf.tab.o scripts/kconfig/zconf.tab.c
 
 source_scripts/kconfig/zconf.tab.o := scripts/kconfig/zconf.tab.c
 

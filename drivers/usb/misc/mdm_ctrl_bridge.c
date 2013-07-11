@@ -819,12 +819,10 @@ void ctrl_bridge_close_asus(unsigned int id)
 
 	dev_dbg(&dev->intf->dev, "%s:\n", __func__);
 
+	usb_unlink_anchored_urbs(&dev->tx_submitted);
 	is_open_asus = false;
-	if (!is_bridge_open()) {
-		ctrl_bridge_set_cbits_asus(ch_id, ACM_CTRL_RTS);
-		ctrl_bridge_set_cbits_asus(ch_id, 0);
-		usb_unlink_anchored_urbs(&dev->tx_submitted);
-	}
+	ctrl_bridge_set_cbits_asus(id, ACM_CTRL_RTS);
+	ctrl_bridge_set_cbits_asus(id, 0);
 }
 EXPORT_SYMBOL(ctrl_bridge_close_asus);
 

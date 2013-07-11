@@ -1,4 +1,4 @@
-cmd_scripts/genksyms/lex.lex.o := gcc -Wp,-MD,scripts/genksyms/.lex.lex.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer     -Iscripts/genksyms -c -o scripts/genksyms/lex.lex.o scripts/genksyms/lex.lex.c
+cmd_scripts/genksyms/lex.lex.o := gcc -Wp,-MD,scripts/genksyms/.lex.lex.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer     -Iscripts/genksyms -c -o scripts/genksyms/lex.lex.o scripts/genksyms/lex.lex.c
 
 source_scripts/genksyms/lex.lex.o := scripts/genksyms/lex.lex.c
 

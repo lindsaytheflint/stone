@@ -33,6 +33,12 @@
 #include <linux/proc_fs.h>
 #include <linux/asusdebug.h>
 
+//ASUS_BSP +++ Peter_Lu "suspend for fastboot mode"
+#ifdef CONFIG_FASTBOOT
+#include <linux/fastboot.h>
+#endif //#ifdef CONFIG_FASTBOOT
+//ASUS_BSP --- 
+
 /* Macros assume PMIC GPIOs and MPPs start at 1 */
 #define PM8921_GPIO_BASE    NR_GPIO_IRQS
 #define PM8921_GPIO_PM_TO_SYS(pm_gpio)	(pm_gpio - 1 + PM8921_GPIO_BASE)
@@ -708,6 +714,14 @@ void notify_microp_hdmi_remove(int virtual)
        else{
                printk("MicroP: HDMI -> REMOVE \r\n");
        }
+
+//ASUS_BSP +++ Peter_Lu "suspend for fastboot mode"
+#ifdef CONFIG_FASTBOOT
+      if(is_fastboot_enable()){
+	  	ready_to_wake_up_and_send_power_key_press_event_in_fastboot();
+      }
+#endif //#ifdef CONFIG_FASTBOOT
+//ASUS_BSP ---
        
        if(g_uP_info){
                 printk("%s,  g_b_isP01Connected=%d\r\n",__FUNCTION__,  g_b_isP01Connected);

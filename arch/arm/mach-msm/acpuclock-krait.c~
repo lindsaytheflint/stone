@@ -908,9 +908,8 @@ ssize_t acpuclk_set_vdd2(char *buf)
 }
 #endif  /* CONFIG_CPU_VOLTAGE_TABLE */
 
-
 #ifdef CONFIG_CPU_FREQ_MSM
-static struct cpufreq_frequency_table freq_table[NR_CPUS][35];
+static struct cpufreq_frequency_table freq_table[NR_CPUS][36];
 
 static void __init cpufreq_table_init(void)
 {
@@ -1130,7 +1129,13 @@ static void __init hw_init(void)
 
 	bus_init(l2_level);
 #ifdef CONFIG_CPU_LIMITDURINGBOOT
+//	for_each_possible_cpu(cpu) {
+//		acpuclk_krait_set_rate(cpu, 1458000, SETRATE_CPUFREQ);
+//	}
 	acpuclk_krait_set_rate(0, 1458000, SETRATE_CPUFREQ);
+	acpuclk_krait_set_rate(1, 384000, SETRATE_CPUFREQ);
+	acpuclk_krait_set_rate(2, 384000, SETRATE_CPUFREQ);
+	acpuclk_krait_set_rate(3, 384000, SETRATE_CPUFREQ);
 #endif
 }
 

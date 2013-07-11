@@ -1,4 +1,4 @@
-cmd_scripts/mod/modpost.o := gcc -Wp,-MD,scripts/mod/.modpost.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer      -c -o scripts/mod/modpost.o scripts/mod/modpost.c
+cmd_scripts/mod/modpost.o := gcc -Wp,-MD,scripts/mod/.modpost.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer      -c -o scripts/mod/modpost.o scripts/mod/modpost.c
 
 source_scripts/mod/modpost.o := scripts/mod/modpost.c
 

@@ -2922,6 +2922,9 @@ static void set_DisOTGmode_whenCap_0(void)
 	printk("[BAT]Cap 0 DisOTG---\n ");
 }
 //ASUS_BSP Eason:when shutdown device set smb346 charger to DisOTG mode ---
+//Eason show temp limit +++
+extern int showSmb346TempLimitReason(void);
+//Eason show temp limit ---
 
 static void AXC_BatteryService_reportPropertyCapacity(struct AXC_BatteryService *_this, int refcapacity)
 {
@@ -3079,7 +3082,7 @@ if(true==g_BootUp_IsBatLow )
                                       intervalSinceLastUpdate,
                                       A66_capacity);
 //ASUS_BSP +++ Eason_Chang add event log +++
-     ASUSEvtlog("[BAT][Ser]report Capacity:%d,%d,%d,%d,%d,%d,%d,%d,%ld==>%d  ,BMS:%d, diffBMS:%d\n",
+     ASUSEvtlog("[BAT][Ser]report Capacity:%d,%d,%d,%d,%d,%d,%d,%d,%ld==>%d  ,BMS:%d, diffBMS:%d, TempLimit:%d\n",
                                     refcapacity,
                                     lastCapacity,
                                       hasCable,
@@ -3091,7 +3094,8 @@ if(true==g_BootUp_IsBatLow )
                                       intervalSinceLastUpdate,
                                       A66_capacity,
                                       gBMS_Cap,
-                                      gDiff_BMS);
+                                      gDiff_BMS,
+                                      showSmb346TempLimitReason());
 //ASUS_BSP --- Eason_Chang add event log ---   
 //Eason: remember last BMS Cap to filter+++
 //	last_BMS_Cap = gBMS_Cap;

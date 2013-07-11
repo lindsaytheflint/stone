@@ -637,6 +637,16 @@ struct v4l2_plane {
  * Contains data exchanged by application and driver using one of the Streaming
  * I/O methods.
  */
+//ASUS_BSP +++ LiJen "[A80][Camera][NA][Others]implement EXIF in kernel"
+struct exif_cfg {
+      uint16_t iso;
+      uint32_t exp_time_num;    // Numerator
+      uint32_t exp_time_denom;  // Denominator
+      uint16_t flash_mode;
+      uint32_t edge;
+};
+//ASUS_BSP --- LiJen "[A80][Camera][NA][Others]implement EXIF in kernel"
+
 struct v4l2_buffer {
 	__u32			index;
 	enum v4l2_buf_type      type;
@@ -657,6 +667,7 @@ struct v4l2_buffer {
 	__u32			length;
 	__u32			input;
 	__u32			reserved;
+       struct exif_cfg JpegExif;   //ASUS_BSP LiJen "[A80][Camera][NA][Others]implement EXIF in kernel"
 };
 
 /*  Flags for 'flags' field */

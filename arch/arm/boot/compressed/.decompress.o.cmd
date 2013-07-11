@@ -1,4 +1,4 @@
-cmd_arch/arm/boot/compressed/decompress.o := /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/scripts/gcc-wrapper.py /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-gcc -Wp,-MD,arch/arm/boot/compressed/.decompress.o.d  -nostdinc -isystem /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/../lib/gcc/arm-linux-androideabi/4.6.x-google/include -I/home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-msm/include -DASUS_SW_VER=\"A68_ENG\" -w -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Os -marm -fno-dwarf2-cfi-asm -fstack-protector -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -Wno-unused-but-set-variable -fomit-frame-pointer -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -fpic -fno-builtin -Iarch/arm/boot/compressed    -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(decompress)"  -D"KBUILD_MODNAME=KBUILD_STR(decompress)" -c -o arch/arm/boot/compressed/.tmp_decompress.o arch/arm/boot/compressed/decompress.c
+cmd_arch/arm/boot/compressed/decompress.o := /home/flint/src_pf2/StoneK_10.4.16.8/scripts/gcc-wrapper.py /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-gcc -Wp,-MD,arch/arm/boot/compressed/.decompress.o.d  -nostdinc -isystem /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/../lib/gcc/arm-linux-androideabi/4.6.x-google/include -I/home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/flint/src_pf2/StoneK_10.4.16.8/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-msm/include -DASUS_SW_VER=\"A68_ENG\" -w -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Os -marm -fno-dwarf2-cfi-asm -fstack-protector -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -Wno-unused-but-set-variable -fomit-frame-pointer -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -fpic -fno-builtin -Iarch/arm/boot/compressed    -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(decompress)"  -D"KBUILD_MODNAME=KBUILD_STR(decompress)" -c -o arch/arm/boot/compressed/.tmp_decompress.o arch/arm/boot/compressed/decompress.c
 
 source_arch/arm/boot/compressed/decompress.o := arch/arm/boot/compressed/decompress.c
 
@@ -23,17 +23,17 @@ deps_arch/arm/boot/compressed/decompress.o := \
     $(wildcard include/config/arch/dma/addr/t/64bit.h) \
     $(wildcard include/config/phys/addr/t/64bit.h) \
     $(wildcard include/config/64bit.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/types.h \
   include/asm-generic/int-ll64.h \
   arch/arm/include/generated/asm/bitsperlong.h \
   include/asm-generic/bitsperlong.h \
   include/linux/posix_types.h \
   include/linux/stddef.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/posix_types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/posix_types.h \
   include/asm-generic/posix_types.h \
   include/linux/linkage.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/linkage.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/string.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/linkage.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/string.h \
   arch/arm/boot/compressed/../../../../lib/decompress_inflate.c \
   arch/arm/boot/compressed/../../../../lib/zlib_inflate/inftrees.c \
   include/linux/zutil.h \

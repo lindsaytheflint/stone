@@ -1,4 +1,4 @@
-cmd_scripts/bin2c := gcc -Wp,-MD,scripts/.bin2c.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer    -I/home/flint/src_pf2/PF2-10.4.15.1-kernel-src/tools/include  -o scripts/bin2c scripts/bin2c.c  
+cmd_scripts/bin2c := gcc -Wp,-MD,scripts/.bin2c.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer    -I/home/flint/src_pf2/StoneK_10.4.16.8/tools/include  -o scripts/bin2c scripts/bin2c.c  
 
 source_scripts/bin2c := scripts/bin2c.c
 

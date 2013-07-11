@@ -37,7 +37,7 @@ config CPU_LIMITDURINGBOOT
 	help
 	 x
 
-config CONFIG_CPU_FIXLIMITS
+config CPU_FIXLIMITS
 	bool "Fix CPU limiting"
 	default n
 	help
@@ -79,6 +79,12 @@ config LCD_UNDERVOLT
 	help
 	 x
 	 
+config LCD_LESS_BRIGHT
+	bool "Decrease brightness"
+	default n
+	help
+	 x
+
 config INCREASE_STORAGE_READAHEAD
 	bool "Increase storage min/max read-ahead values"
 	default n

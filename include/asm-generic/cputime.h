@@ -7,8 +7,6 @@
 //LF:
 #define cputime64_add(__a, __b) ((__a) + (__b))
 #define cputime64_sub(__a, __b) ((__a) - (__b))
-
-
 //end LF
 
 typedef unsigned long __nocast cputime_t;

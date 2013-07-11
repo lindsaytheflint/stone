@@ -15,7 +15,7 @@ MODULE_INFO(intree, "Y");
 static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
-	{ 0x7b19b6a5, "module_layout" },
+	{ 0x78ec5434, "module_layout" },
 	{ 0x2e5810c6, "__aeabi_unwind_cpp_pr1" },
 	{ 0x27e1a049, "printk" },
 	{ 0x12a38747, "usleep_range" },

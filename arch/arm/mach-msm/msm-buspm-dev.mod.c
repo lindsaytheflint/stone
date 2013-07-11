@@ -19,10 +19,10 @@ MODULE_INFO(intree, "Y");
 static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
-	{ 0x7b19b6a5, "module_layout" },
+	{ 0x78ec5434, "module_layout" },
 	{ 0x16d7cf76, "noop_llseek" },
-	{ 0x77294755, "misc_deregister" },
-	{ 0x1bcefad4, "misc_register" },
+	{ 0xe35b78dd, "misc_deregister" },
+	{ 0x65e0c700, "misc_register" },
 	{ 0xfa2a45e, "__memzero" },
 	{ 0x67c2fa54, "__copy_to_user" },
 	{ 0xfbc74f64, "__copy_from_user" },
@@ -30,8 +30,8 @@ __attribute__((section("__versions"))) = {
 	{ 0x3f71b3c4, "memory_pool_node_paddr" },
 	{ 0x1ae9a10c, "allocate_contiguous_ebi" },
 	{ 0x7f58ee2a, "remap_pfn_range" },
-	{ 0x49dbd601, "kmalloc_caches" },
-	{ 0x8ba9d67, "kmem_cache_alloc_trace" },
+	{ 0xff088cfe, "kmalloc_caches" },
+	{ 0xc3377a31, "kmem_cache_alloc_trace" },
 	{ 0xc6cbbc89, "capable" },
 	{ 0x37a0cba, "kfree" },
 	{ 0xefd6cf06, "__aeabi_unwind_cpp_pr0" },

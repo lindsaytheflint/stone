@@ -19,17 +19,17 @@ MODULE_INFO(intree, "Y");
 static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
-	{ 0x7b19b6a5, "module_layout" },
-	{ 0x5dc1d7d1, "input_unregister_handler" },
-	{ 0xfe2d46fe, "input_register_handler" },
-	{ 0x49dbd601, "kmalloc_caches" },
-	{ 0x942d1a90, "input_open_device" },
-	{ 0xe0036f08, "input_register_handle" },
-	{ 0x8ba9d67, "kmem_cache_alloc_trace" },
+	{ 0x78ec5434, "module_layout" },
+	{ 0xc287a857, "input_unregister_handler" },
+	{ 0x1be4d15e, "input_register_handler" },
+	{ 0xff088cfe, "kmalloc_caches" },
+	{ 0xdc2f306d, "input_open_device" },
+	{ 0x1926aec9, "input_register_handle" },
+	{ 0xc3377a31, "kmem_cache_alloc_trace" },
 	{ 0xefd6cf06, "__aeabi_unwind_cpp_pr0" },
 	{ 0x37a0cba, "kfree" },
-	{ 0x7d7ffe55, "input_unregister_handle" },
-	{ 0xc0f39072, "input_close_device" },
+	{ 0x6b323fe3, "input_unregister_handle" },
+	{ 0x22045aa3, "input_close_device" },
 	{ 0x2e5810c6, "__aeabi_unwind_cpp_pr1" },
 	{ 0x27e1a049, "printk" },
 };

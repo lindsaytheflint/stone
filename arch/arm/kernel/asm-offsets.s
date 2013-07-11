@@ -13,7 +13,7 @@
 @	compiled by GNU C version 4.4.3, GMP version 4.2.4, MPFR version 2.4.1, MPC version 0.8.1
 @ GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 @ options passed:  -nostdinc
-@ -I /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include
+@ -I /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include
 @ -I arch/arm/include/generated -I include -I arch/arm/mach-msm/include
 @ -imultilib armv7-a
 @ -iprefix /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/../lib/gcc/arm-linux-androideabi/4.6.x-google/
@@ -21,7 +21,7 @@
 @ -D KBUILD_STR(s)=#s -D KBUILD_BASENAME=KBUILD_STR(asm_offsets)
 @ -D KBUILD_MODNAME=KBUILD_STR(asm_offsets)
 @ -isystem /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/../lib/gcc/arm-linux-androideabi/4.6.x-google/include
-@ -include /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/include/linux/kconfig.h
+@ -include /home/flint/src_pf2/StoneK_10.4.16.8/include/linux/kconfig.h
 @ -MD arch/arm/kernel/.asm-offsets.s.d arch/arm/kernel/asm-offsets.c
 @ -mbionic -fPIC -mlittle-endian -marm -mabi=aapcs-linux
 @ -mno-thumb-interwork -march=armv7-a -msoft-float -mfpu=vfp

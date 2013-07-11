@@ -1,4 +1,4 @@
-cmd_scripts/mod/sumversion.o := gcc -Wp,-MD,scripts/mod/.sumversion.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer      -c -o scripts/mod/sumversion.o scripts/mod/sumversion.c
+cmd_scripts/mod/sumversion.o := gcc -Wp,-MD,scripts/mod/.sumversion.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer      -c -o scripts/mod/sumversion.o scripts/mod/sumversion.c
 
 source_scripts/mod/sumversion.o := scripts/mod/sumversion.c
 

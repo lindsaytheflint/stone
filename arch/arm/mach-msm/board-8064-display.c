@@ -415,7 +415,11 @@ static int mipi_dsi_panel_power(int on)
 			return -ENODEV;
 		}
 
-		rc = regulator_set_voltage(reg_l2, 1200000, 1200000);
+#ifdef CONFIG_LCD_UNDERVOLT
+		rc = regulator_set_voltage(reg_l2, 1100000, 1100000); //LF: Display voltage??  1200000, 1200000);
+#else
+		rc = regulator_set_voltage(reg_l2, 1200000, 1200000); //LF: Display voltage??  1200000, 1200000);
+#endif
 		if (rc) {
 			pr_err("set_voltage l2 failed, rc=%d\n", rc);
 			return -EINVAL;
@@ -427,7 +431,11 @@ static int mipi_dsi_panel_power(int on)
 						PTR_ERR(reg_l11));
 				return -ENODEV;
 		}
-		rc = regulator_set_voltage(reg_l11, 3000000, 3000000);
+#ifdef CONFIG_LCD_UNDERVOLT
+		rc = regulator_set_voltage(reg_l11, 2700000, 2700000); //LF: Display voltage??  3000000, 3000000);
+#else
+		rc = regulator_set_voltage(reg_l11, 3000000, 3000000); //LF: Display voltage??  3000000, 3000000);
+#endif
 		if (rc) {
 				pr_err("set_voltage l11 failed, rc=%d\n", rc);
 				return -EINVAL;
@@ -481,7 +489,7 @@ static int mipi_dsi_panel_power(int on)
 			return -ENODEV;
 		}
 
-		rc = regulator_set_optimum_mode(reg_l11, 110000);
+		rc = regulator_set_optimum_mode(reg_l11, 110000); //LF: Display voltage??  110000);
 		if (rc < 0) {
 			pr_err("set_optimum_mode l11 failed, rc=%d\n", rc);
 			return -EINVAL;
@@ -492,7 +500,7 @@ static int mipi_dsi_panel_power(int on)
 			return -ENODEV;
 		}
 
-		rc = regulator_set_optimum_mode(reg_l2, 100000);
+		rc = regulator_set_optimum_mode(reg_l2, 100000); //LF: Display voltage??  100000);
 		if (rc < 0) {
 			pr_err("set_optimum_mode l2 failed, rc=%d\n", rc);
 			return -EINVAL;
@@ -586,13 +594,21 @@ static int a68_mipi_dsi_sharp_panel_power(int on)
                 PTR_ERR(reg_l2));
             return -ENODEV;
         }
-        rc = regulator_set_voltage(reg_l11, 3100000, 3100000);
+#ifdef CONFIG_LCD_UNDERVOLT
+        rc = regulator_set_voltage(reg_l11, 2600000, 2600000); //LF: Display voltage??
+#else
+        rc = regulator_set_voltage(reg_l11, 3100000, 3100000); //LF: Display voltage??
+#endif
         if (rc) {
             pr_err("set_voltage l11 failed, rc=%d\n", rc);
             return -EINVAL;
         }
 
-        rc = regulator_set_voltage(reg_l2, 1200000, 1200000);
+#ifdef CONFIG_LCD_UNDERVOLT
+        rc = regulator_set_voltage(reg_l2, 1200000, 1200000); //LF: Display voltage??
+#else
+        rc = regulator_set_voltage(reg_l2, 1200000, 1200000); //LF: Display voltage??
+#endif
         if (rc) {
             pr_err("set_voltage l2 failed, rc=%d\n", rc);
             return -EINVAL;
@@ -604,13 +620,13 @@ static int a68_mipi_dsi_sharp_panel_power(int on)
             return -ENODEV;
         }
 #endif
-        rc = regulator_set_optimum_mode(reg_l11, 100000);
+        rc = regulator_set_optimum_mode(reg_l11, 100000); //LF: Display voltage??
         if (rc < 0) {
             pr_err("set_optimum_mode l11 failed, rc=%d\n", rc); 
             return -EINVAL;
         }
 
-        rc = regulator_set_optimum_mode(reg_l2, 100000);
+        rc = regulator_set_optimum_mode(reg_l2, 100000); //LF: Display voltage??
         if (rc < 0) {
             pr_err("set_optimum_mode l2 failed, rc=%d\n", rc);
             return -EINVAL;
@@ -648,7 +664,7 @@ static int a68_mipi_dsi_sharp_panel_power(int on)
 
     if (on) {
 
-        rc = regulator_set_optimum_mode(reg_l2, 100000);
+        rc = regulator_set_optimum_mode(reg_l2, 100000); //LF: Display voltage??
         if (rc < 0) {
             pr_err("set_optimum_mode l2 failed, rc=%d\n", rc);
             return -EINVAL;

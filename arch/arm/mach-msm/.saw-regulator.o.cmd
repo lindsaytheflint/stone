@@ -1,4 +1,4 @@
-cmd_arch/arm/mach-msm/saw-regulator.o := /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/scripts/gcc-wrapper.py /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-gcc -Wp,-MD,arch/arm/mach-msm/.saw-regulator.o.d  -nostdinc -isystem /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/../lib/gcc/arm-linux-androideabi/4.6.x-google/include -I/home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-msm/include -DASUS_SW_VER=\"A68_ENG\" -w -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Os -marm -fno-dwarf2-cfi-asm -fstack-protector -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -Wno-unused-but-set-variable -fomit-frame-pointer -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack    -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(saw_regulator)"  -D"KBUILD_MODNAME=KBUILD_STR(saw_regulator)" -c -o arch/arm/mach-msm/.tmp_saw-regulator.o arch/arm/mach-msm/saw-regulator.c
+cmd_arch/arm/mach-msm/saw-regulator.o := /home/flint/src_pf2/StoneK_10.4.16.8/scripts/gcc-wrapper.py /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-gcc -Wp,-MD,arch/arm/mach-msm/.saw-regulator.o.d  -nostdinc -isystem /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/../lib/gcc/arm-linux-androideabi/4.6.x-google/include -I/home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/flint/src_pf2/StoneK_10.4.16.8/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-msm/include -DASUS_SW_VER=\"A68_ENG\" -w -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Os -marm -fno-dwarf2-cfi-asm -fstack-protector -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -Wno-unused-but-set-variable -fomit-frame-pointer -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack    -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(saw_regulator)"  -D"KBUILD_MODNAME=KBUILD_STR(saw_regulator)" -c -o arch/arm/mach-msm/.tmp_saw-regulator.o arch/arm/mach-msm/saw-regulator.c
 
 source_arch/arm/mach-msm/saw-regulator.o := arch/arm/mach-msm/saw-regulator.c
 
@@ -33,19 +33,19 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/arch/dma/addr/t/64bit.h) \
     $(wildcard include/config/phys/addr/t/64bit.h) \
     $(wildcard include/config/64bit.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/types.h \
   include/asm-generic/int-ll64.h \
   arch/arm/include/generated/asm/bitsperlong.h \
   include/asm-generic/bitsperlong.h \
   include/linux/posix_types.h \
   include/linux/stddef.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/posix_types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/posix_types.h \
   include/asm-generic/posix_types.h \
   /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/../lib/gcc/arm-linux-androideabi/4.6.x-google/include/stdarg.h \
   include/linux/linkage.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/linkage.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/linkage.h \
   include/linux/bitops.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/bitops.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/bitops.h \
     $(wildcard include/config/smp.h) \
   include/linux/irqflags.h \
     $(wildcard include/config/trace/irqflags.h) \
@@ -53,11 +53,11 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/preempt/tracer.h) \
     $(wildcard include/config/trace/irqflags/support.h) \
   include/linux/typecheck.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/irqflags.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/ptrace.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/irqflags.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/ptrace.h \
     $(wildcard include/config/cpu/endian/be8.h) \
     $(wildcard include/config/arm/thumb.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/hwcap.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/hwcap.h \
   include/asm-generic/bitops/non-atomic.h \
   include/asm-generic/bitops/fls64.h \
   include/asm-generic/bitops/sched.h \
@@ -66,10 +66,10 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
   include/asm-generic/bitops/const_hweight.h \
   include/asm-generic/bitops/lock.h \
   include/asm-generic/bitops/le.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/byteorder.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/byteorder.h \
   include/linux/byteorder/little_endian.h \
   include/linux/swab.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/swab.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/swab.h \
   include/linux/byteorder/generic.h \
   include/asm-generic/bitops/ext2-atomic-setbit.h \
   include/linux/log2.h \
@@ -83,9 +83,9 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/hotplug.h) \
   include/linux/dynamic_debug.h \
   include/linux/asusdebug.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/div64.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/compiler.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/bug.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/div64.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/compiler.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/bug.h \
     $(wildcard include/config/bug.h) \
     $(wildcard include/config/thumb2/kernel.h) \
     $(wildcard include/config/debug/bugverbose.h) \
@@ -108,12 +108,12 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/illegal/pointer/value.h) \
   include/linux/const.h \
   include/linux/stat.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/stat.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/stat.h \
   include/linux/time.h \
     $(wildcard include/config/arch/uses/gettimeoffset.h) \
   include/linux/cache.h \
     $(wildcard include/config/arch/has/cache/line/size.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/cache.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/cache.h \
     $(wildcard include/config/arm/l1/cache/shift.h) \
     $(wildcard include/config/aeabi.h) \
   include/linux/seqlock.h \
@@ -128,42 +128,42 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/preempt/notifiers.h) \
   include/linux/thread_info.h \
     $(wildcard include/config/compat.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/thread_info.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/thread_info.h \
     $(wildcard include/config/arm/thumbee.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/fpstate.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/fpstate.h \
     $(wildcard include/config/vfpv3.h) \
     $(wildcard include/config/iwmmxt.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/domain.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/domain.h \
     $(wildcard include/config/verify/permission/fault.h) \
     $(wildcard include/config/io/36.h) \
     $(wildcard include/config/cpu/use/domains.h) \
     $(wildcard include/config/emulate/domain/manager/v7.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/barrier.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/barrier.h \
     $(wildcard include/config/cpu/32v6k.h) \
     $(wildcard include/config/cpu/xsc3.h) \
     $(wildcard include/config/cpu/fa526.h) \
     $(wildcard include/config/arch/has/barriers.h) \
     $(wildcard include/config/arm/dma/mem/bufferable.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/outercache.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/outercache.h \
     $(wildcard include/config/outer/cache/sync.h) \
     $(wildcard include/config/outer/cache.h) \
   include/linux/stringify.h \
   include/linux/bottom_half.h \
   include/linux/spinlock_types.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/spinlock_types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/spinlock_types.h \
   include/linux/lockdep.h \
     $(wildcard include/config/lockdep.h) \
     $(wildcard include/config/lock/stat.h) \
     $(wildcard include/config/prove/rcu.h) \
   include/linux/rwlock_types.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/spinlock.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/spinlock.h \
     $(wildcard include/config/msm/krait/wfe/fixup.h) \
     $(wildcard include/config/arm/ticket/locks.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/processor.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/processor.h \
     $(wildcard include/config/have/hw/breakpoint.h) \
     $(wildcard include/config/mmu.h) \
     $(wildcard include/config/arm/errata/754327.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/hw_breakpoint.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/hw_breakpoint.h \
   include/linux/rwlock.h \
   include/linux/spinlock_api_smp.h \
     $(wildcard include/config/inline/spin/lock.h) \
@@ -198,8 +198,8 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
   include/linux/atomic.h \
     $(wildcard include/config/arch/has/atomic/or.h) \
     $(wildcard include/config/generic/atomic64.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/atomic.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/cmpxchg.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/atomic.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/cmpxchg.h \
     $(wildcard include/config/cpu/sa1100.h) \
     $(wildcard include/config/cpu/sa110.h) \
     $(wildcard include/config/cpu/v6.h) \
@@ -236,7 +236,7 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/holes/in/zone.h) \
     $(wildcard include/config/arch/has/holes/memorymodel.h) \
   include/linux/wait.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/current.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/current.h \
   include/linux/threads.h \
     $(wildcard include/config/nr/cpus.h) \
     $(wildcard include/config/base/small.h) \
@@ -246,12 +246,12 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
   include/linux/bitmap.h \
   include/linux/string.h \
     $(wildcard include/config/binary/printf.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/string.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/string.h \
   include/linux/pageblock-flags.h \
     $(wildcard include/config/hugetlb/page.h) \
     $(wildcard include/config/hugetlb/page/size/variable.h) \
   include/generated/bounds.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/page.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/page.h \
     $(wildcard include/config/cpu/copy/v3.h) \
     $(wildcard include/config/cpu/copy/v4wt.h) \
     $(wildcard include/config/cpu/copy/v4wb.h) \
@@ -260,9 +260,9 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/cpu/xscale.h) \
     $(wildcard include/config/cpu/copy/v6.h) \
     $(wildcard include/config/memory/hotplug/sparse.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/glue.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable-2level-types.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/memory.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/glue.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable-2level-types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/memory.h \
     $(wildcard include/config/need/mach/memory/h.h) \
     $(wildcard include/config/page/offset.h) \
     $(wildcard include/config/dram/size.h) \
@@ -320,7 +320,7 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/debug/objects.h) \
     $(wildcard include/config/debug/objects/free.h) \
   include/linux/rcutree.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/sparsemem.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/sparsemem.h \
   include/linux/topology.h \
     $(wildcard include/config/sched/smt.h) \
     $(wildcard include/config/sched/mc.h) \
@@ -328,7 +328,7 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/use/percpu/numa/node/id.h) \
   include/linux/smp.h \
     $(wildcard include/config/use/generic/smp/helpers.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/smp.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/smp.h \
   include/linux/percpu.h \
     $(wildcard include/config/need/per/cpu/embed/first/chunk.h) \
     $(wildcard include/config/need/per/cpu/page/first/chunk.h) \
@@ -338,7 +338,7 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
   include/asm-generic/percpu.h \
   include/linux/percpu-defs.h \
     $(wildcard include/config/debug/force/weak/per/cpu.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/topology.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/topology.h \
     $(wildcard include/config/arm/cpu/topology.h) \
   include/asm-generic/topology.h \
   include/linux/mmdebug.h \
@@ -355,9 +355,9 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
   include/linux/jiffies.h \
   include/linux/timex.h \
   include/linux/param.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/param.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/param.h \
     $(wildcard include/config/hz.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/timex.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/timex.h \
   arch/arm/mach-msm/include/mach/timex.h \
     $(wildcard include/config/have/arch/has/current/timer.h) \
   include/linux/sysctl.h \
@@ -365,8 +365,8 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
   include/linux/rbtree.h \
   include/linux/elf.h \
   include/linux/elf-em.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/elf.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/user.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/elf.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/user.h \
   include/linux/kobject.h \
   include/linux/sysfs.h \
   include/linux/kobject_ns.h \
@@ -382,10 +382,10 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
   include/linux/export.h \
     $(wildcard include/config/symbol/prefix.h) \
     $(wildcard include/config/modversions.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/module.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/module.h \
     $(wildcard include/config/arm/unwind.h) \
   include/linux/delay.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/delay.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/delay.h \
   include/linux/slab.h \
     $(wildcard include/config/slab/debug.h) \
     $(wildcard include/config/failslab.h) \
@@ -412,7 +412,7 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/pm/runtime.h) \
     $(wildcard include/config/pm/clk.h) \
     $(wildcard include/config/pm/generic/domains.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/device.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/device.h \
     $(wildcard include/config/dmabounce.h) \
     $(wildcard include/config/iommu/api.h) \
     $(wildcard include/config/arch/omap.h) \
@@ -496,19 +496,19 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/page/poisoning.h) \
     $(wildcard include/config/page/guard.h) \
     $(wildcard include/config/page/debug/something/else.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/mmu.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/mmu.h \
     $(wildcard include/config/cpu/has/asid.h) \
   arch/arm/include/generated/asm/cputime.h \
   include/asm-generic/cputime.h \
   include/linux/sem.h \
   include/linux/ipc.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/ipcbuf.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/ipcbuf.h \
   include/asm-generic/ipcbuf.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/sembuf.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/sembuf.h \
   include/linux/signal.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/signal.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/signal.h \
   include/asm-generic/signal-defs.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/sigcontext.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/sigcontext.h \
   arch/arm/include/generated/asm/siginfo.h \
   include/asm-generic/siginfo.h \
   include/linux/pid.h \
@@ -562,17 +562,16 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
   include/linux/mm.h \
     $(wildcard include/config/fix/movable/zone.h) \
     $(wildcard include/config/ksm.h) \
-    $(wildcard include/config/increase/storage/readahead.h) \
     $(wildcard include/config/debug/pagealloc.h) \
   include/linux/debug_locks.h \
     $(wildcard include/config/debug/locking/api/selftests.h) \
   include/linux/range.h \
   include/linux/bit_spinlock.h \
   include/linux/shrinker.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable.h \
     $(wildcard include/config/highpte.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/proc-fns.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/glue-proc.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/proc-fns.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/glue-proc.h \
     $(wildcard include/config/cpu/arm610.h) \
     $(wildcard include/config/cpu/arm7tdmi.h) \
     $(wildcard include/config/cpu/arm710.h) \
@@ -594,9 +593,9 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/cpu/v6k.h) \
     $(wildcard include/config/cpu/v7.h) \
   include/asm-generic/pgtable-nopud.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable-hwdef.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable-2level-hwdef.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable-2level.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable-hwdef.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable-2level-hwdef.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable-2level.h \
   include/asm-generic/pgtable.h \
   include/linux/page-flags.h \
     $(wildcard include/config/pageflags/extended.h) \
@@ -612,7 +611,7 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
     $(wildcard include/config/generic/pending/irq.h) \
   include/linux/irqreturn.h \
   include/linux/irqnr.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/irq.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/irq.h \
     $(wildcard include/config/sparse/irq.h) \
   arch/arm/mach-msm/include/mach/irqs.h \
     $(wildcard include/config/arch/apq8064.h) \
@@ -634,7 +633,7 @@ deps_arch/arm/mach-msm/saw-regulator.o := \
   include/asm-generic/irq_regs.h \
   include/linux/irqdesc.h \
     $(wildcard include/config/irq/preflow/fasteoi.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/hw_irq.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/hw_irq.h \
   include/linux/mfd/core.h \
   include/linux/mfd/pm8xxx/irq.h \
     $(wildcard include/config/mfd/pm8xxx/irq.h) \

@@ -1,4 +1,4 @@
-cmd_scripts/conmakehash := gcc -Wp,-MD,scripts/.conmakehash.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer    -I/home/flint/src_pf2/PF2-10.4.15.1-kernel-src/tools/include  -o scripts/conmakehash scripts/conmakehash.c  
+cmd_scripts/conmakehash := gcc -Wp,-MD,scripts/.conmakehash.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer    -I/home/flint/src_pf2/StoneK_10.4.16.8/tools/include  -o scripts/conmakehash scripts/conmakehash.c  
 
 source_scripts/conmakehash := scripts/conmakehash.c
 

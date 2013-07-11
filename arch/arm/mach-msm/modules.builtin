@@ -8,9 +8,4 @@ kernel/arch/arm/mach-msm/lpass-8960.ko
 kernel/arch/arm/mach-msm/wcnss-ssr-8960.ko
 kernel/arch/arm/mach-msm/bms-batterydata.ko
 kernel/arch/arm/mach-msm/bms-batterydata-desay.ko
-kernel/arch/arm/mach-msm/rpm_stats.ko
-kernel/arch/arm/mach-msm/rpm_rbcpr_stats.ko
-kernel/arch/arm/mach-msm/rpm_log.ko
-kernel/arch/arm/mach-msm/tz_log.ko
 kernel/arch/arm/mach-msm/hsic_sysmon.ko
-kernel/arch/arm/mach-msm/cpufreq_limit.ko

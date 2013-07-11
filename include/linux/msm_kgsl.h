@@ -197,7 +197,6 @@ struct kgsl_device_platform_data {
 	unsigned int chipid;
 };
 
-
 #endif
 
 /* structure holds list of ibs */

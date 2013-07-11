@@ -20,7 +20,7 @@ config CPU_OVERCLOCK2
 	 x
 
 config CPU_LOWER_MINCLOCK
-	bool "Lower min CPU freq to 192khz"
+	bool "Lower min CPU freq to 162/192khz"
 	default n
 	help
 	 x
@@ -68,7 +68,7 @@ config GPU_UNDERVOLT
 	 x
 
 config GPU_LOWER_NORMALFREQ
-	bool "GPU lower normal freq from 400 to 128"
+	bool "GPU lower normal freq from 400 to 128/200"
 	default n
 	help
 	 x
@@ -79,6 +79,12 @@ config LCD_UNDERVOLT
 	help
 	 x
 	 
+config LCD_LESS_BRIGHT
+	bool "Decrease brightness"
+	default n
+	help
+	 x
+
 config INCREASE_STORAGE_READAHEAD
 	bool "Increase storage min/max read-ahead values"
 	default n
@@ -92,6 +98,11 @@ config FORCE_FAST_CHARGE
 	 A simple sysfs interface to force adapters that
 	 are detected as USB to charge as AC. 
 
+config POWERSAVER
+	bool "Power Saver edition"
+	default n
+	help
+	 Restrict CPU, GPU, and other tweaks to lower battery usage.
 endmenu
 
 config SRCARCH

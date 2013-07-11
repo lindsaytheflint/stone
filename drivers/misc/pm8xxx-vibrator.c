@@ -54,6 +54,8 @@ module_param_named(debug_mask, debug_mask, int, S_IRUGO | S_IWUSR | S_IWGRP);
 #define VIB_MAX_LEVEL_mV	3100
 #define VIB_MIN_LEVEL_mV	1200
 
+struct pm8xxx_vib *g_vib; //austin++
+
 struct pm8xxx_vib {
 	struct hrtimer vib_timer;
 	struct timed_output_dev timed_dev;
@@ -202,6 +204,7 @@ retry:
 //ASUS BSP HANS--
 		value = (value > vib->pdata->max_timeout_ms ?
 				 vib->pdata->max_timeout_ms : value);
+		printk("max_timeout_ms= %d", vib->pdata->max_timeout_ms);
 		vib->state = 1;
 		hrtimer_start(&vib->vib_timer,
 			      ktime_set(value / 1000, (value % 1000) * 1000000),
@@ -210,6 +213,15 @@ retry:
 	spin_unlock_irqrestore(&vib->lock, flags);
 	schedule_work(&vib->work);
 }
+
+//austin++
+void set_vib_enable(int value){
+
+pm8xxx_vib_enable(&g_vib->timed_dev,value);
+
+}
+EXPORT_SYMBOL(set_vib_enable);
+//austin---
 
 static void pm8xxx_vib_update(struct work_struct *work)
 {
@@ -279,6 +291,8 @@ static int __devinit pm8xxx_vib_probe(struct platform_device *pdev)
 	vib = kzalloc(sizeof(*vib), GFP_KERNEL);
 	if (!vib)
 		return -ENOMEM;
+
+	g_vib = vib; //austin++
 
 	vib->pdata	= pdata;
 	vib->level	= pdata->level_mV / 100;

@@ -1026,8 +1026,6 @@ static void al3010_late_resume_delayed_work(struct work_struct *work)
 			i2c_smbus_read_byte_data(al3010_client, AL3010_ADC_MSB);
 	}
 	al3010_interrupt_busy = false;
-	msleep(1);
-	AX_MicroP_enablePinInterrupt( INTR_EN_ALS_INT, 1 );
 }
 
 #ifdef CONFIG_HAS_EARLYSUSPEND
@@ -1062,6 +1060,7 @@ static void al3010_late_resume(struct early_suspend *handler)
 				//set_als_power_state_of_P01(g_al3010_switch_on);
 			}
 		}
+		AX_MicroP_enablePinInterrupt( INTR_EN_ALS_INT, 1 );
 	}
 	g_al3010_switch_earlysuspend=0;
 	printk("[als_P01]--al3010_late_resume\n");

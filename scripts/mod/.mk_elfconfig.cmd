@@ -1,4 +1,4 @@
-cmd_scripts/mod/mk_elfconfig := gcc -Wp,-MD,scripts/mod/.mk_elfconfig.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer      -o scripts/mod/mk_elfconfig scripts/mod/mk_elfconfig.c  
+cmd_scripts/mod/mk_elfconfig := gcc -Wp,-MD,scripts/mod/.mk_elfconfig.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer      -o scripts/mod/mk_elfconfig scripts/mod/mk_elfconfig.c  
 
 source_scripts/mod/mk_elfconfig := scripts/mod/mk_elfconfig.c
 

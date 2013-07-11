@@ -1315,9 +1315,11 @@ EXPORT_SYMBOL_GPL(vb2_wait_for_all_buffers);
  * The return values from this function are intended to be directly returned
  * from vidioc_dqbuf handler in driver.
  */
+extern void iCatch_get_exif(struct exif_cfg *exif); //ASUS_BSP LiJen "[A80][Camera][NA][Others]implement EXIF in kernel"
 int vb2_dqbuf(struct vb2_queue *q, struct v4l2_buffer *b, bool nonblocking)
 {
 	struct vb2_buffer *vb = NULL;
+       struct exif_cfg JpegExif; //ASUS_BSP LiJen "[A80][Camera][NA][Others]implement EXIF in kernel"
 	int ret;
 
 	if (q->fileio) {
@@ -1353,6 +1355,12 @@ int vb2_dqbuf(struct vb2_queue *q, struct v4l2_buffer *b, bool nonblocking)
 		dprintk(1, "dqbuf: Invalid buffer state\n");
 		return -EINVAL;
 	}
+//ASUS_BSP +++ LiJen "[A80][Camera][NA][Others]implement EXIF in kernel"
+       //Fill EXIF information
+       memset(&JpegExif,  0,  sizeof(JpegExif));
+       iCatch_get_exif(&JpegExif);
+       memcpy(&(b->JpegExif), &JpegExif, sizeof(struct exif_cfg));
+//ASUS_BSP --- LiJen "[A80][Camera][NA][Others]implement EXIF in kernel"
 
 	/* Fill buffer information for the userspace */
 	__fill_v4l2_buffer(vb, b);

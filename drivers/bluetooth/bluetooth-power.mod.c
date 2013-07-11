@@ -19,18 +19,18 @@ MODULE_INFO(intree, "Y");
 static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
-	{ 0x7b19b6a5, "module_layout" },
-	{ 0x226f9bff, "platform_driver_unregister" },
-	{ 0xa6b1a724, "platform_driver_register" },
+	{ 0x78ec5434, "module_layout" },
+	{ 0x790b57dc, "platform_driver_unregister" },
+	{ 0x784fbacc, "platform_driver_register" },
 	{ 0x4cabed9, "rfkill_register" },
 	{ 0xaad6d92f, "rfkill_init_sw_state" },
-	{ 0x872de711, "dev_err" },
-	{ 0x87b98146, "rfkill_alloc" },
-	{ 0x31f08540, "dev_set_drvdata" },
+	{ 0xa099e649, "dev_err" },
+	{ 0x675b65c1, "rfkill_alloc" },
+	{ 0x84164b42, "dev_set_drvdata" },
 	{ 0xdb68bbad, "rfkill_destroy" },
 	{ 0x83eb21c, "rfkill_unregister" },
-	{ 0x6b8b79e7, "dev_get_drvdata" },
-	{ 0x7583dd9d, "__dynamic_dev_dbg" },
+	{ 0x2a87e02e, "dev_get_drvdata" },
+	{ 0xdfcf516a, "__dynamic_dev_dbg" },
 	{ 0xefd6cf06, "__aeabi_unwind_cpp_pr0" },
 };
 

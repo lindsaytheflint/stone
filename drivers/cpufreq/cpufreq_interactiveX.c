@@ -578,19 +578,8 @@ static int cpufreq_governor_interactivex(struct cpufreq_policy *policy,
 	switch (event) {
 	case CPUFREQ_GOV_START:
 
-#ifdef CONFIG_CPU_FIXLIMITS
-//		//LF:
-		for_each_cpu(j, policy->cpus) {
-			//if (j==0) 
-			pcpu = &per_cpu(cpuinfo, j);
-			pcpu->policy = policy;
-			pcpu->target_freq = 1566000//policy->cur;
-			cpu_online(j);
-		}
-#else
 		if (!cpu_online(policy->cpu))
 			return -EINVAL;
-#endif
 
 		freq_table =
 			cpufreq_frequency_get_table(policy->cpu);

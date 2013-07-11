@@ -39,6 +39,8 @@ extern struct completion g_iCatch_comp;
 
 extern bool g_isAFDone;
 extern unsigned char g_mi1040_power;
+extern int g_cur_res;
+
 
 DEFINE_MUTEX(imx091_mut);
 struct msm_sensor_ctrl_t imx091_s_ctrl; //ASUS_BSP LiJen "[A68][13M][NA][Others]Mini porting for 13M camera with ISP"
@@ -510,7 +512,7 @@ static int32_t imx091_sensor_setting(struct msm_sensor_ctrl_t *s_ctrl,
 {
 	int32_t rc = 0;
         
-	pr_info("%s +++\n",__func__);      
+	pr_info("%s +++ res(%d)\n",__func__,res);       
 
 #if 0	//LiJen: ISP dosen't  need                     
 	s_ctrl->func_tbl->sensor_stop_stream(s_ctrl);
@@ -572,6 +574,7 @@ static int32_t imx091_sensor_setting(struct msm_sensor_ctrl_t *s_ctrl,
 #endif
 
             pr_info("%s res %d, xres %u, yres %u\n",__func__,res,  imx091_dimensions[res].x_output, imx091_dimensions[res].y_output);
+            g_cur_res=res;
             rc = sensor_set_mode(res);     
 	}
 
@@ -643,6 +646,7 @@ int32_t imx091_sensor_mode_init(struct msm_sensor_ctrl_t *s_ctrl,
 		}
 #endif		
 
+        g_cur_res = MSM_SENSOR_INVALID_RES;
 		s_ctrl->curr_res = MSM_SENSOR_INVALID_RES;
 		s_ctrl->cam_mode = mode;
 
@@ -1100,7 +1104,8 @@ int imx091_power_down(const struct msm_camera_sensor_info *data, bool ISPbootup)
 		case A68_ER2:
 		case A68_ER3:
 		case A68_PR:
-            //case A68_MP:
+        case A68_PR2:
+        case A68_MP:
 		default:
 		//mutex_lock(imx091_s_ctrl.msm_sensor_mutex);    //ASUS_BSP Stimber "Fix the issue which fail to re-open camera"
 		// Switch CLK to 8M
@@ -1215,7 +1220,8 @@ static int imx091_gpio_request(void)
 		case A68_ER2:
 		case A68_ER3:
 		case A68_PR:
-            //case A68_MP:
+        case A68_PR2:
+        case A68_MP:
 		default:
 			// Power on ISP module:
 	        rc = gpio_request(PM8921_GPIO_PM_TO_SYS(imx091_s_ctrl.sensordata->sensor_platform_info->isp_1p2_en), "imx091");
@@ -1427,7 +1433,8 @@ int imx091_power_up(const struct msm_camera_sensor_info *data, bool ISPbootup)
 		case A68_ER2:
 		case A68_ER3:
 		case A68_PR:
-            //case A68_MP:
+        case A68_PR2:
+        case A68_MP:
 		default:
 		// ISP power on +++	
 		//ISP SUSPEND high
@@ -1688,10 +1695,9 @@ int32_t imx091_sensor_i2c_probe(struct i2c_client *client,
 			imx091_s_ctrl.sensordata->sensor_platform_info->sensor_reset = 12; 	  //PM(12)
 			imx091_s_ctrl.sensordata->sensor_platform_info->isp_1p8_en = 11; 	  //PM(11)
 			imx091_s_ctrl.sensordata->sensor_platform_info->isp_suspend= 1; 	  //PM(1)
-			imx091_s_ctrl.sensordata->sensor_platform_info->isp_int = 13; 		  //PM(13)	//no need for A68
+			imx091_s_ctrl.sensordata->sensor_platform_info->isp_int = 13; 		  //PM(13)
 			imx091_s_ctrl.sensordata->sensor_platform_info->fled_driver_ent = 42; //PM(42)
 			//_info("In %s, g_A68_hwID==A60K_EVB\n", __func__);
-			
 			break;
 		case A68_SR1_1:
 		case A68_SR1_2:
@@ -1700,17 +1706,17 @@ int32_t imx091_sensor_i2c_probe(struct i2c_client *client,
 		case A68_ER2:
 		case A68_ER3:
 		case A68_PR:
-            //case A68_MP:
-		default:
+        case A68_PR2:
+        case A68_MP:
+        default:
 			imx091_s_ctrl.sensordata->sensor_platform_info->vga_mclk_en = 87;
 			imx091_s_ctrl.sensordata->sensor_platform_info->isp_1p2_en = 10; 	  //PM(10)
 			imx091_s_ctrl.sensordata->sensor_platform_info->sensor_reset = 12;    //PM(12)
 			imx091_s_ctrl.sensordata->sensor_platform_info->isp_1p8_en = 11;      //PM(11)
 			imx091_s_ctrl.sensordata->sensor_platform_info->isp_suspend= 34;
-			imx091_s_ctrl.sensordata->sensor_platform_info->isp_int = 31;		  //no need for A68
+			imx091_s_ctrl.sensordata->sensor_platform_info->isp_int = 31;
 			imx091_s_ctrl.sensordata->sensor_platform_info->fled_driver_ent = 55;
 			//_info("In %s, g_A68_hwID>=A68_SR1_1\n", __func__);
-			
 			break;
 	}		
 			
@@ -1977,7 +1983,8 @@ static ssize_t imx091_proc_write_camera_fled(struct file *filp, const char __use
 						case A68_ER2:
 						case A68_ER3:
 						case A68_PR:
-				             //case A68_MP:
+				        case A68_PR2:
+                        case A68_MP:
 						default:
 							gpio_set_value(imx091_s_ctrl.sensordata->sensor_platform_info->fled_driver_ent, 0);
 							
@@ -2020,7 +2027,8 @@ static ssize_t imx091_proc_write_camera_fled(struct file *filp, const char __use
 						case A68_ER2:
 						case A68_ER3:
 						case A68_PR:
-				             //case A68_MP:
+				        case A68_PR2:
+                        case A68_MP:
 						default:
 							rc = gpio_request(imx091_s_ctrl.sensordata->sensor_platform_info->fled_driver_ent, "imx091");
 							if (rc) {

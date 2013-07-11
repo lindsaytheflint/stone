@@ -1,4 +1,4 @@
-cmd_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/scripts/gcc-wrapper.py /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-gcc -Wp,-MD,drivers/staging/prima_legacy/CORE/HDD/src/.wlan_hdd_cfg.o.d  -nostdinc -isystem /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/../lib/gcc/arm-linux-androideabi/4.6.x-google/include -I/home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-msm/include -DASUS_SW_VER=\"A68_ENG\" -DANI_PRODUCT_TYPE_CLIENT=1 -DANI_BUS_TYPE_PLATFORM=1 -DANI_LITTLE_BYTE_ENDIAN -DANI_LITTLE_BIT_ENDIAN -DWLAN_STA=1 -DAP=2 -DWNI_POLARIS_FW_PRODUCT=1 -DQC_WLAN_CHIPSET_PRIMA -DINTEGRATION_READY -DVOSS_ENABLED -DDOT11F_LITTLE_ENDIAN_HOST -DGEN6_ONWARDS -DANI_COMPILER_TYPE_GCC -DANI_OS_TYPE_ANDROID=6 -DWNI_POLARIS_FW_OS=6 -DADVANCED=3 -DWNI_POLARIS_FW_PACKAGE=9 -DTRACE_RECORD -DPE_DEBUG_LOGW -DPE_DEBUG_LOGE -DDEBUG -DANI_LOGDUMP -DWLAN_PERF -DUSE_LOCKED_QUEUE -DPTT_SOCK_SVC_ENABLE -DFEATURE_WLAN_UAPSD_FW_TRG_FRAMES -DWLAN_SOFTAP_FEATURE -DWLAN_DEBUG -D__linux__ -DMSM_PLATFORM -DFEATURE_WLAN_INTEGRATED_SOC -DHAL_SELF_STA_PER_BSS=1 -DANI_MANF_DIAG -DWLAN_FEATURE_VOWIFI_11R -DWLAN_FEATURE_NEIGHBOR_ROAMING -DWLAN_FEATURE_NEIGHBOR_ROAMING_DEBUG -DWLAN_FEATURE_VOWIFI_11R_DEBUG -DFEATURE_WLAN_WAPI -DFEATURE_OEM_DATA_SUPPORT -DSOFTAP_CHANNEL_RANGE -DWLAN_AP_STA_CONCURRENCY -DFEATURE_WLAN_SCAN_PNO -DWLAN_FEATURE_PACKET_FILTERING -DWLAN_FEATURE_VOWIFI -DANI_CHIPSET_VOLANS -DWLAN_FEATURE_P2P -DWLAN_FEATURE_WFD -DWLAN_AUTOGEN_MACADDR_FEATURE -w -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Os -marm -fno-dwarf2-cfi-asm -fstack-protector -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -Wno-unused-but-set-variable -fomit-frame-pointer -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCONFIG_CFG80211=1 -Idrivers/staging/prima_legacy/CORE/BAP/inc -Idrivers/staging/prima_legacy/CORE/BAP/src -Idrivers/staging/prima_legacy/CORE/DXE/inc -Idrivers/staging/prima_legacy/CORE/DXE/src -Idrivers/staging/prima_legacy/CORE/HDD/inc -Idrivers/staging/prima_legacy/CORE/HDD/src -Iinclude/linux -Idrivers/staging/prima_legacy/CORE/MAC/inc -Idrivers/staging/prima_legacy/CORE/MAC/src/dph -Idrivers/staging/prima_legacy/CORE/MAC/src/include -Idrivers/staging/prima_legacy/CORE/MAC/src/pe/include -Idrivers/staging/prima_legacy/CORE/MAC/src/pe/lim -Idrivers/staging/prima_legacy/riva/inc/ -Idrivers/staging/prima_legacy/CORE/SAP/inc -Idrivers/staging/prima_legacy/CORE/SAP/src -Idrivers/staging/prima_legacy/CORE/SME/inc -Idrivers/staging/prima_legacy/CORE/SME/src/csr -Idrivers/staging/prima_legacy/CORE/SVC/inc -Idrivers/staging/prima_legacy/CORE/SVC/external -Idrivers/staging/prima_legacy/CORE/SYS/common/inc -Idrivers/staging/prima_legacy/CORE/SYS/legacy/src/pal/inc -Idrivers/staging/prima_legacy/CORE/SYS/legacy/src/platform/inc -Idrivers/staging/prima_legacy/CORE/SYS/legacy/src/system/inc -Idrivers/staging/prima_legacy/CORE/SYS/legacy/src/utils/inc -Idrivers/staging/prima_legacy/CORE/TL/inc -Idrivers/staging/prima_legacy/CORE/TL/src -Idrivers/staging/prima_legacy/CORE/VOSS/inc -Idrivers/staging/prima_legacy/CORE/VOSS/src -Idrivers/staging/prima_legacy/CORE/WDA/inc -Idrivers/staging/prima_legacy/CORE/WDA/inc/legacy -Idrivers/staging/prima_legacy/CORE/WDA/src -Idrivers/staging/prima_legacy/CORE/WDI/CP/inc/ -Idrivers/staging/prima_legacy/CORE/WDI/DP/inc/ -Idrivers/staging/prima_legacy/CORE/WDI/TRP/CTS/inc/ -Idrivers/staging/prima_legacy/CORE/WDI/TRP/DTS/inc/ -Idrivers/staging/prima_legacy/CORE/WDI/WPAL/inc -w -Wframe-larger-than=4096 -O3  -DMODULE -fno-pic -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(wlan_hdd_cfg)"  -D"KBUILD_MODNAME=KBUILD_STR(wlan)" -c -o drivers/staging/prima_legacy/CORE/HDD/src/.tmp_wlan_hdd_cfg.o drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.c
+cmd_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := /home/flint/src_pf2/StoneK_10.4.16.8/scripts/gcc-wrapper.py /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/arm-linux-androideabi-gcc -Wp,-MD,drivers/staging/prima_legacy/CORE/HDD/src/.wlan_hdd_cfg.o.d  -nostdinc -isystem /home/flint/android/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6/bin/../lib/gcc/arm-linux-androideabi/4.6.x-google/include -I/home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/flint/src_pf2/StoneK_10.4.16.8/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-msm/include -DASUS_SW_VER=\"A68_ENG\" -DANI_PRODUCT_TYPE_CLIENT=1 -DANI_BUS_TYPE_PLATFORM=1 -DANI_LITTLE_BYTE_ENDIAN -DANI_LITTLE_BIT_ENDIAN -DWLAN_STA=1 -DAP=2 -DWNI_POLARIS_FW_PRODUCT=1 -DQC_WLAN_CHIPSET_PRIMA -DINTEGRATION_READY -DVOSS_ENABLED -DDOT11F_LITTLE_ENDIAN_HOST -DGEN6_ONWARDS -DANI_COMPILER_TYPE_GCC -DANI_OS_TYPE_ANDROID=6 -DWNI_POLARIS_FW_OS=6 -DADVANCED=3 -DWNI_POLARIS_FW_PACKAGE=9 -DTRACE_RECORD -DPE_DEBUG_LOGW -DPE_DEBUG_LOGE -DDEBUG -DANI_LOGDUMP -DWLAN_PERF -DUSE_LOCKED_QUEUE -DPTT_SOCK_SVC_ENABLE -DFEATURE_WLAN_UAPSD_FW_TRG_FRAMES -DWLAN_SOFTAP_FEATURE -DWLAN_DEBUG -D__linux__ -DMSM_PLATFORM -DFEATURE_WLAN_INTEGRATED_SOC -DHAL_SELF_STA_PER_BSS=1 -DANI_MANF_DIAG -DWLAN_FEATURE_VOWIFI_11R -DWLAN_FEATURE_NEIGHBOR_ROAMING -DWLAN_FEATURE_NEIGHBOR_ROAMING_DEBUG -DWLAN_FEATURE_VOWIFI_11R_DEBUG -DFEATURE_WLAN_WAPI -DFEATURE_OEM_DATA_SUPPORT -DSOFTAP_CHANNEL_RANGE -DWLAN_AP_STA_CONCURRENCY -DFEATURE_WLAN_SCAN_PNO -DWLAN_FEATURE_PACKET_FILTERING -DWLAN_FEATURE_VOWIFI -DANI_CHIPSET_VOLANS -DWLAN_FEATURE_P2P -DWLAN_FEATURE_WFD -DWLAN_AUTOGEN_MACADDR_FEATURE -w -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Os -marm -fno-dwarf2-cfi-asm -fstack-protector -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -Wno-unused-but-set-variable -fomit-frame-pointer -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCONFIG_CFG80211=1 -Idrivers/staging/prima_legacy/CORE/BAP/inc -Idrivers/staging/prima_legacy/CORE/BAP/src -Idrivers/staging/prima_legacy/CORE/DXE/inc -Idrivers/staging/prima_legacy/CORE/DXE/src -Idrivers/staging/prima_legacy/CORE/HDD/inc -Idrivers/staging/prima_legacy/CORE/HDD/src -Iinclude/linux -Idrivers/staging/prima_legacy/CORE/MAC/inc -Idrivers/staging/prima_legacy/CORE/MAC/src/dph -Idrivers/staging/prima_legacy/CORE/MAC/src/include -Idrivers/staging/prima_legacy/CORE/MAC/src/pe/include -Idrivers/staging/prima_legacy/CORE/MAC/src/pe/lim -Idrivers/staging/prima_legacy/riva/inc/ -Idrivers/staging/prima_legacy/CORE/SAP/inc -Idrivers/staging/prima_legacy/CORE/SAP/src -Idrivers/staging/prima_legacy/CORE/SME/inc -Idrivers/staging/prima_legacy/CORE/SME/src/csr -Idrivers/staging/prima_legacy/CORE/SVC/inc -Idrivers/staging/prima_legacy/CORE/SVC/external -Idrivers/staging/prima_legacy/CORE/SYS/common/inc -Idrivers/staging/prima_legacy/CORE/SYS/legacy/src/pal/inc -Idrivers/staging/prima_legacy/CORE/SYS/legacy/src/platform/inc -Idrivers/staging/prima_legacy/CORE/SYS/legacy/src/system/inc -Idrivers/staging/prima_legacy/CORE/SYS/legacy/src/utils/inc -Idrivers/staging/prima_legacy/CORE/TL/inc -Idrivers/staging/prima_legacy/CORE/TL/src -Idrivers/staging/prima_legacy/CORE/VOSS/inc -Idrivers/staging/prima_legacy/CORE/VOSS/src -Idrivers/staging/prima_legacy/CORE/WDA/inc -Idrivers/staging/prima_legacy/CORE/WDA/inc/legacy -Idrivers/staging/prima_legacy/CORE/WDA/src -Idrivers/staging/prima_legacy/CORE/WDI/CP/inc/ -Idrivers/staging/prima_legacy/CORE/WDI/DP/inc/ -Idrivers/staging/prima_legacy/CORE/WDI/TRP/CTS/inc/ -Idrivers/staging/prima_legacy/CORE/WDI/TRP/DTS/inc/ -Idrivers/staging/prima_legacy/CORE/WDI/WPAL/inc -w -Wframe-larger-than=4096 -O3  -DMODULE -fno-pic -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(wlan_hdd_cfg)"  -D"KBUILD_MODNAME=KBUILD_STR(wlan)" -c -o drivers/staging/prima_legacy/CORE/HDD/src/.tmp_wlan_hdd_cfg.o drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.c
 
 source_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.c
 
@@ -11,7 +11,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/arch/dma/addr/t/64bit.h) \
     $(wildcard include/config/phys/addr/t/64bit.h) \
     $(wildcard include/config/64bit.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/types.h \
   include/asm-generic/int-ll64.h \
   arch/arm/include/generated/asm/bitsperlong.h \
   include/asm-generic/bitsperlong.h \
@@ -27,7 +27,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/arch/supports/optimized/inlining.h) \
     $(wildcard include/config/optimize/inlining.h) \
   include/linux/compiler-gcc4.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/posix_types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/posix_types.h \
   include/asm-generic/posix_types.h \
   include/linux/gfp.h \
     $(wildcard include/config/kmemcheck.h) \
@@ -74,16 +74,16 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/thread_info.h \
     $(wildcard include/config/compat.h) \
   include/linux/bitops.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/bitops.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/bitops.h \
   include/linux/irqflags.h \
     $(wildcard include/config/trace/irqflags.h) \
     $(wildcard include/config/irqsoff/tracer.h) \
     $(wildcard include/config/trace/irqflags/support.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/irqflags.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/ptrace.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/irqflags.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/ptrace.h \
     $(wildcard include/config/cpu/endian/be8.h) \
     $(wildcard include/config/arm/thumb.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/hwcap.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/hwcap.h \
   include/asm-generic/bitops/non-atomic.h \
   include/asm-generic/bitops/fls64.h \
   include/asm-generic/bitops/sched.h \
@@ -92,33 +92,33 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/asm-generic/bitops/const_hweight.h \
   include/asm-generic/bitops/lock.h \
   include/asm-generic/bitops/le.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/byteorder.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/byteorder.h \
   include/linux/byteorder/little_endian.h \
   include/linux/swab.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/swab.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/swab.h \
   include/linux/byteorder/generic.h \
   include/asm-generic/bitops/ext2-atomic-setbit.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/thread_info.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/thread_info.h \
     $(wildcard include/config/arm/thumbee.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/fpstate.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/fpstate.h \
     $(wildcard include/config/vfpv3.h) \
     $(wildcard include/config/iwmmxt.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/domain.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/domain.h \
     $(wildcard include/config/verify/permission/fault.h) \
     $(wildcard include/config/io/36.h) \
     $(wildcard include/config/cpu/use/domains.h) \
     $(wildcard include/config/emulate/domain/manager/v7.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/barrier.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/barrier.h \
     $(wildcard include/config/cpu/32v6k.h) \
     $(wildcard include/config/cpu/xsc3.h) \
     $(wildcard include/config/cpu/fa526.h) \
     $(wildcard include/config/arch/has/barriers.h) \
     $(wildcard include/config/arm/dma/mem/bufferable.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/outercache.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/outercache.h \
     $(wildcard include/config/outer/cache/sync.h) \
     $(wildcard include/config/outer/cache.h) \
   include/linux/linkage.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/linkage.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/linkage.h \
   include/linux/list.h \
     $(wildcard include/config/debug/list.h) \
   include/linux/poison.h \
@@ -144,9 +144,9 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/hotplug.h) \
   include/linux/dynamic_debug.h \
   include/linux/asusdebug.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/div64.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/compiler.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/bug.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/div64.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/compiler.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/bug.h \
     $(wildcard include/config/bug.h) \
     $(wildcard include/config/thumb2/kernel.h) \
     $(wildcard include/config/debug/bugverbose.h) \
@@ -157,20 +157,20 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/stringify.h \
   include/linux/bottom_half.h \
   include/linux/spinlock_types.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/spinlock_types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/spinlock_types.h \
   include/linux/lockdep.h \
     $(wildcard include/config/lockdep.h) \
     $(wildcard include/config/lock/stat.h) \
     $(wildcard include/config/prove/rcu.h) \
   include/linux/rwlock_types.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/spinlock.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/spinlock.h \
     $(wildcard include/config/msm/krait/wfe/fixup.h) \
     $(wildcard include/config/arm/ticket/locks.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/processor.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/processor.h \
     $(wildcard include/config/have/hw/breakpoint.h) \
     $(wildcard include/config/mmu.h) \
     $(wildcard include/config/arm/errata/754327.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/hw_breakpoint.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/hw_breakpoint.h \
   include/linux/rwlock.h \
   include/linux/spinlock_api_smp.h \
     $(wildcard include/config/inline/spin/lock.h) \
@@ -205,18 +205,18 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/atomic.h \
     $(wildcard include/config/arch/has/atomic/or.h) \
     $(wildcard include/config/generic/atomic64.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/atomic.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/cmpxchg.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/atomic.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/cmpxchg.h \
     $(wildcard include/config/cpu/sa1100.h) \
     $(wildcard include/config/cpu/sa110.h) \
     $(wildcard include/config/cpu/v6.h) \
   include/asm-generic/cmpxchg-local.h \
   include/asm-generic/atomic-long.h \
   include/linux/wait.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/current.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/current.h \
   include/linux/cache.h \
     $(wildcard include/config/arch/has/cache/line/size.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/cache.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/cache.h \
     $(wildcard include/config/arm/l1/cache/shift.h) \
     $(wildcard include/config/aeabi.h) \
   include/linux/threads.h \
@@ -229,12 +229,12 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/bitmap.h \
   include/linux/string.h \
     $(wildcard include/config/binary/printf.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/string.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/string.h \
   include/linux/pageblock-flags.h \
     $(wildcard include/config/hugetlb/page.h) \
     $(wildcard include/config/hugetlb/page/size/variable.h) \
   include/generated/bounds.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/page.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/page.h \
     $(wildcard include/config/cpu/copy/v3.h) \
     $(wildcard include/config/cpu/copy/v4wt.h) \
     $(wildcard include/config/cpu/copy/v4wb.h) \
@@ -243,9 +243,9 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/cpu/xscale.h) \
     $(wildcard include/config/cpu/copy/v6.h) \
     $(wildcard include/config/memory/hotplug/sparse.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/glue.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable-2level-types.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/memory.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/glue.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable-2level-types.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/memory.h \
     $(wildcard include/config/need/mach/memory/h.h) \
     $(wildcard include/config/page/offset.h) \
     $(wildcard include/config/dram/size.h) \
@@ -306,7 +306,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/debug/objects.h) \
     $(wildcard include/config/debug/objects/free.h) \
   include/linux/rcutree.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/sparsemem.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/sparsemem.h \
   include/linux/topology.h \
     $(wildcard include/config/sched/smt.h) \
     $(wildcard include/config/sched/mc.h) \
@@ -314,7 +314,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/use/percpu/numa/node/id.h) \
   include/linux/smp.h \
     $(wildcard include/config/use/generic/smp/helpers.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/smp.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/smp.h \
   include/linux/percpu.h \
     $(wildcard include/config/need/per/cpu/embed/first/chunk.h) \
     $(wildcard include/config/need/per/cpu/page/first/chunk.h) \
@@ -324,7 +324,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/asm-generic/percpu.h \
   include/linux/percpu-defs.h \
     $(wildcard include/config/debug/force/weak/per/cpu.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/topology.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/topology.h \
     $(wildcard include/config/arm/cpu/topology.h) \
   include/asm-generic/topology.h \
   include/linux/mmdebug.h \
@@ -342,7 +342,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/constructors.h) \
     $(wildcard include/config/debug/set/module/ronx.h) \
   include/linux/stat.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/stat.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/stat.h \
   include/linux/time.h \
     $(wildcard include/config/arch/uses/gettimeoffset.h) \
   include/linux/math64.h \
@@ -358,9 +358,9 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/jiffies.h \
   include/linux/timex.h \
   include/linux/param.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/param.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/param.h \
     $(wildcard include/config/hz.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/timex.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/timex.h \
   arch/arm/mach-msm/include/mach/timex.h \
     $(wildcard include/config/have/arch/has/current/timer.h) \
   include/linux/sysctl.h \
@@ -368,8 +368,8 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/rbtree.h \
   include/linux/elf.h \
   include/linux/elf-em.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/elf.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/user.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/elf.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/user.h \
   include/linux/kobject.h \
   include/linux/sysfs.h \
   include/linux/kobject_ns.h \
@@ -385,13 +385,13 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/export.h \
     $(wildcard include/config/symbol/prefix.h) \
     $(wildcard include/config/modversions.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/module.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/module.h \
     $(wildcard include/config/arm/unwind.h) \
   include/linux/wireless.h \
   include/linux/socket.h \
     $(wildcard include/config/proc/fs.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/socket.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/sockios.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/socket.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/sockios.h \
   include/linux/sockios.h \
   include/linux/uio.h \
   include/linux/if.h \
@@ -453,7 +453,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/page/poisoning.h) \
     $(wildcard include/config/page/guard.h) \
     $(wildcard include/config/page/debug/something/else.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/mmu.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/mmu.h \
     $(wildcard include/config/cpu/has/asid.h) \
   include/linux/net.h \
   include/linux/random.h \
@@ -464,7 +464,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/irqnr.h \
     $(wildcard include/config/generic/hardirqs.h) \
   include/linux/fcntl.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/fcntl.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/fcntl.h \
   include/asm-generic/fcntl.h \
   include/linux/textsearch.h \
   include/linux/err.h \
@@ -481,10 +481,10 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/kmemleak.h \
     $(wildcard include/config/debug/kmemleak.h) \
   include/net/checksum.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/uaccess.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/unified.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/uaccess.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/unified.h \
     $(wildcard include/config/arm/asm/unified.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/checksum.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/checksum.h \
   include/linux/in6.h \
   include/linux/dmaengine.h \
     $(wildcard include/config/async/tx/enable/channel/switch.h) \
@@ -501,7 +501,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/pm/runtime.h) \
     $(wildcard include/config/pm/clk.h) \
     $(wildcard include/config/pm/generic/domains.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/device.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/device.h \
     $(wildcard include/config/dmabounce.h) \
     $(wildcard include/config/iommu/api.h) \
     $(wildcard include/config/arch/omap.h) \
@@ -512,7 +512,6 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/fix/movable/zone.h) \
     $(wildcard include/config/stack/growsup.h) \
     $(wildcard include/config/ksm.h) \
-    $(wildcard include/config/increase/storage/readahead.h) \
     $(wildcard include/config/debug/pagealloc.h) \
     $(wildcard include/config/hibernation.h) \
     $(wildcard include/config/hugetlbfs.h) \
@@ -521,10 +520,10 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/range.h \
   include/linux/bit_spinlock.h \
   include/linux/shrinker.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable.h \
     $(wildcard include/config/highpte.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/proc-fns.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/glue-proc.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/proc-fns.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/glue-proc.h \
     $(wildcard include/config/cpu/arm610.h) \
     $(wildcard include/config/cpu/arm7tdmi.h) \
     $(wildcard include/config/cpu/arm710.h) \
@@ -546,9 +545,9 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/cpu/v6k.h) \
     $(wildcard include/config/cpu/v7.h) \
   include/asm-generic/pgtable-nopud.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable-hwdef.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable-2level-hwdef.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/pgtable-2level.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable-hwdef.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable-2level-hwdef.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/pgtable-2level.h \
   include/asm-generic/pgtable.h \
   include/linux/page-flags.h \
     $(wildcard include/config/pageflags/extended.h) \
@@ -560,11 +559,11 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/vmstat.h \
     $(wildcard include/config/vm/event/counters.h) \
   include/linux/vm_event_item.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/scatterlist.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/scatterlist.h \
     $(wildcard include/config/arm/has/sg/chain.h) \
   include/asm-generic/scatterlist.h \
     $(wildcard include/config/need/sg/dma/length.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/io.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/io.h \
     $(wildcard include/config/need/mach/io/h.h) \
     $(wildcard include/config/pcmcia/soc/common.h) \
     $(wildcard include/config/pci.h) \
@@ -587,7 +586,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/need/dma/map/state.h) \
   include/linux/dma-attrs.h \
   include/linux/dma-direction.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/dma-mapping.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/dma-mapping.h \
   include/linux/dma-debug.h \
     $(wildcard include/config/dma/api/debug.h) \
   include/asm-generic/dma-coherent.h \
@@ -603,7 +602,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/miscdevice.h \
   include/linux/major.h \
   include/linux/delay.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/delay.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/delay.h \
   include/linux/rculist.h \
   include/linux/dynamic_queue_limits.h \
   include/linux/ethtool.h \
@@ -729,13 +728,13 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/asm-generic/cputime.h \
   include/linux/sem.h \
   include/linux/ipc.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/ipcbuf.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/ipcbuf.h \
   include/asm-generic/ipcbuf.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/sembuf.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/sembuf.h \
   include/linux/signal.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/signal.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/signal.h \
   include/asm-generic/signal-defs.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/sigcontext.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/sigcontext.h \
   arch/arm/include/generated/asm/siginfo.h \
   include/asm-generic/siginfo.h \
   include/linux/proportions.h \
@@ -774,8 +773,8 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
   include/linux/hardirq.h \
   include/linux/ftrace_irq.h \
     $(wildcard include/config/ftrace/nmi/enter.h) \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/hardirq.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/irq.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/hardirq.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/irq.h \
     $(wildcard include/config/sparse/irq.h) \
   arch/arm/mach-msm/include/mach/irqs.h \
     $(wildcard include/config/arch/apq8064.h) \
@@ -939,7 +938,7 @@ deps_drivers/staging/prima_legacy/CORE/HDD/src/wlan_hdd_cfg.o := \
     $(wildcard include/config/h//.h) \
   drivers/staging/prima_legacy/CORE/HDD/inc/wlan_hdd_ftm.h \
   include/linux/msg.h \
-  /home/flint/src_pf2/PF2-10.4.15.1-kernel-src/arch/arm/include/asm/msgbuf.h \
+  /home/flint/src_pf2/StoneK_10.4.16.8/arch/arm/include/asm/msgbuf.h \
   drivers/staging/prima_legacy/CORE/SVC/inc/wlan_ptt_sock_svc.h \
   drivers/staging/prima_legacy/CORE/SVC/inc/wlan_nlink_srv.h \
   drivers/staging/prima_legacy/CORE/SVC/external/wlan_nlink_common.h \

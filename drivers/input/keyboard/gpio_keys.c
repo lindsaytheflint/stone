@@ -56,6 +56,13 @@ extern int g_cm36283_earlysuspend_int;
 //Maggie ---: for proximity sensor
 
 struct kobject *kobj;//ASUS_BSP + [thomas]Send uevent to userspace
+#include <linux/reboot.h>
+#include <asm/cacheflush.h>
+#include <linux/asus_global.h>
+extern struct _asus_global asus_global;
+extern void resetdevice(void);
+extern void set_dload_mode(int on);
+extern void set_vib_enable(int value);
 struct pad_buttons_code {
     int vol_up;
     int vol_down;
@@ -98,7 +105,48 @@ struct gpio_keys_drvdata {
 	struct pad_buttons_code pad_button_code;  //ASUS BSP HANS+
 	struct gpio_button_data data[0];
 };
+//check power 6sec enter sw reset
+static  struct work_struct __wait_for_power_key_6s_work;
 
+void wait_for_power_key_6s_work(struct work_struct *work)
+{
+	static int power_key_6s_running = 0;
+	int i, power_key;
+	power_key = 26;
+    if(!power_key_6s_running)
+	{ 
+		if (gpio_get_value_cansleep(power_key) != 0)
+		{
+			return;
+		}
+		power_key_6s_running = 1;
+		for(i = 0; i < 60; i++)
+		{
+			if (gpio_get_value_cansleep(power_key) == 0)
+			{
+				msleep(100);
+			}
+			else
+			{
+				break;
+			}
+		}	
+		if(i == 60)
+		{
+			printk("reset device after power press 6 sec\r\n");
+			set_vib_enable(200);
+			msleep(200);
+			set_dload_mode(0);
+			asus_global.ramdump_enable_magic = 0;
+			printk(KERN_CRIT "asus_global.ramdump_enable_magic = 0x%x\n",asus_global.ramdump_enable_magic);
+			flush_cache_all();				
+			resetdevice();
+		}
+		
+		power_key_6s_running = 0;
+	}
+}
+//
 
 //jack for debug slow
 //#include "../../../sound/soc/codecs/wcd9310.h"
@@ -432,12 +480,9 @@ static struct attribute_group gpio_keys_attr_group = {
 };
 static unsigned int count_start = 0;  
 static unsigned int count = 0;  
-extern void set_dload_mode(int on);
-extern void resetdevice(void);
-#include <linux/reboot.h>
-#include <asm/cacheflush.h>
-#include <linux/asus_global.h>
-extern struct _asus_global asus_global;
+
+
+
 int volumedownkeystatus;
 int bootupcount = 0;
 static void gpio_keys_gpio_report_event(struct gpio_button_data *bdata)
@@ -446,14 +491,19 @@ static void gpio_keys_gpio_report_event(struct gpio_button_data *bdata)
 	struct input_dev *input = bdata->input;
 	unsigned int type = button->type ?: EV_KEY;
 	int state = (gpio_get_value_cansleep(button->gpio) ? 1 : 0) ^ button->active_low;
-   	int volume_up_key, volume_down_key;
+   	int volume_up_key, volume_down_key,power_key;
    	int volume_down_key_status_change_from_press = 0;
 	char *envp[3];//ASUS_BSP + [thomas]Send uevent to userspace
 	volume_up_key = 53;
 	volume_down_key = 54;
-
+	power_key = 26;
+	
 	GPIO_KEYS_PRINTK(DEBUG_REPORT_EVENT,"key code=%d  state=%s\n",
 			button->code,state ? "press" : "release");  //ASUS BSP HANS+
+	if (gpio_get_value_cansleep(power_key) == 0)
+	{
+		schedule_work(&__wait_for_power_key_6s_work);
+	}
 	//ASUS_BSP +++ [thomas]Send uevent to userspace
 	envp[0] = "top_event";
 	envp[1] = NULL;
@@ -1449,6 +1499,8 @@ static int __devinit gpio_keys_probe(struct platform_device *pdev)
 	int volume_down_key = 54;
     //jack for debug slow
     INIT_WORK(&__wait_for_two_keys_work, wait_for_two_keys_work);
+    
+    INIT_WORK(&__wait_for_power_key_6s_work, wait_for_power_key_6s_work);
 
 //Ledger ++
         wake_lock_init(&pwr_key_wake_lock, WAKE_LOCK_SUSPEND, "pwr_key_lock");

@@ -84,6 +84,8 @@ int a68_set_backlight(value)
         value -= 2000;
     }
 
+	//printk("[LF] %d - %d\n",g_A68_hwID,A68_SR2);
+	
     if (g_A68_hwID >= A68_SR2)  //driver ic support
     {
         if (value == 0 || value == 1000) {
@@ -133,8 +135,13 @@ int a68_set_backlight(value)
             }
             else 
             {
+			#if CONFIG_LCD_LESS_BRIGHT
+                index = ((value - 20) * ((135*10000)/ 235)) / 10000 + 1;
+                //20~255 mapping 1~135; max:300nits, min:20nits, default:100nits(17%)
+			#else
                 index = ((value - 20) * ((125*10000)/ 235)) / 10000 + 11;
                 //20~255 mapping 11~135; max:300nits, min:20nits, default:100nits(17%)
+			#endif
 
                 if (index >= 135) {
                     index = 135;
@@ -160,6 +167,9 @@ int a68_set_backlight(value)
             }
             else
             {
+			#if CONFIG_LCD_LESS_BRIGHT
+			#else
+			#endif
                 index = ((value - 1020) * ((192*10000)/ 235)) / 10000 + 64;
                 //1020~1255 mapping 64~255; max:550nits, min:140nits(25%)
 

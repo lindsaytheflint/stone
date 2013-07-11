@@ -1,4 +1,4 @@
-cmd_scripts/mod/file2alias.o := gcc -Wp,-MD,scripts/mod/.file2alias.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer      -c -o scripts/mod/file2alias.o scripts/mod/file2alias.c
+cmd_scripts/mod/file2alias.o := gcc -Wp,-MD,scripts/mod/.file2alias.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer      -c -o scripts/mod/file2alias.o scripts/mod/file2alias.c
 
 source_scripts/mod/file2alias.o := scripts/mod/file2alias.c
 

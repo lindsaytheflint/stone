@@ -1,4 +1,4 @@
-cmd_scripts/kconfig/lxdialog/menubox.o := gcc -Wp,-MD,scripts/kconfig/lxdialog/.menubox.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer    -DCURSES_LOC="<ncurses.h>" -DLOCALE   -c -o scripts/kconfig/lxdialog/menubox.o scripts/kconfig/lxdialog/menubox.c
+cmd_scripts/kconfig/lxdialog/menubox.o := gcc -Wp,-MD,scripts/kconfig/lxdialog/.menubox.o.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer    -DCURSES_LOC="<ncurses.h>" -DLOCALE   -c -o scripts/kconfig/lxdialog/menubox.o scripts/kconfig/lxdialog/menubox.c
 
 source_scripts/kconfig/lxdialog/menubox.o := scripts/kconfig/lxdialog/menubox.c
 

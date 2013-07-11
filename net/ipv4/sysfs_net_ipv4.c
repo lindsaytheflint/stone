@@ -56,6 +56,7 @@ struct port_link
 DECLARE_COMPLETION(listen_event);
 extern struct port_link syn_firewall_port_link_head;
 extern spinlock_t listen_port_lock;
+int lp_modem_restart=0;//ASUS_BSP Johnny +++ return listen_port when modem restart
 static ssize_t listen_port_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf) 
 { 
 	unsigned long r=0;
@@ -72,7 +73,19 @@ static ssize_t listen_port_show(struct kobject *kobj, struct kobj_attribute *att
 	    return sprintf(buf, "3"); 
 	}
 	spin_lock_bh(&listen_port_lock);
-	
+        //ASUS_BSP Johnny +++ return listen_port when modem restart
+        if(lp_modem_restart==1)
+        {
+
+            printk("[SYN]modem restart return listen port\n");
+            complete(&listen_event);
+            lp_modem_restart=0;
+            spin_unlock_bh(&listen_port_lock);
+
+            return sprintf(buf,"4 1");
+        }
+        //ASUS_BSP ---
+
 	while(p->next!=NULL)
 	{
 		struct port_link *prev;

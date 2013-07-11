@@ -68,6 +68,7 @@
 #define CM36283_DRV_NAME     "cm36283"
 
 #define GPIO_PROXIMITY_INT          38
+#define GPIO_PROXIMITY_PWR_EN	3
 
 struct i2c_client *cm36283_client = NULL;
 struct cm36283_data {
@@ -93,28 +94,33 @@ struct input_dev *this_input_dev_as = NULL;
 struct input_dev *this_input_dev_ps = NULL;
 
 static struct workqueue_struct *cm36283_workqueue;
+static struct workqueue_struct *cm36283_delay_workqueue;
 //[CR] Queue a work to write ATD self-detect file;
 
 static struct work_struct cm36283_attached_Pad_work;
 static struct work_struct cm36283_light_interrupt_work;
 static struct work_struct cm36283_proximity_interrupt_work;
+static struct delayed_work cm36283_light_interrupt_delay_work;
 
 static int g_switch[2] = {0,0}; //switch on/off for proximity and light.
 
 static u8 g_cm36283_int_state =1;
+static int g_cm36283_on_fail=0;
 
 static int g_proxm_dbg = 0; /* Add for debug only */
 static int g_ambient_dbg = 0; /* Add for debug only */
 static int g_interval = 100;
 static int g_proxm_switch_on = 0;
 static int pad_proxm_switch_on = 0;/*For phone call on in pad issue*/
-static int g_cm36283_switch_earlysuspend = 0;
 static int g_ambient_suspended = 0;
+static int g_cm36283_switch_earlysuspend = 0;
+static int g_cm36283_reset = 0;
 
 int g_cm36283_earlysuspend_int = 0;		//detect if interrupt occurs after suspend
 
 u16 g_cm36283_light=0;
 static u16 g_last_cm36283_light=0;
+static int g_cm36283_light_first=1;
 
 static u16 g_cm36283_light_adc = 0;
 static u16 g_cm36283_light_k_adc = 0;
@@ -210,6 +216,7 @@ static int get_adc_calibrated_lux_from_cm36283(void);
 
 static int atd_write_status_and_adc_2(int *als_sts, int *als_adc, int *ps_sts);
 static int proximity_als_turn_on(int bOn);
+static void gpio_proximity_onoff(void);
 
 void als_lux_report_event(int);
 int g_HAL_als_switch_on = 0;     //this var. means if HAL is turning on als or not
@@ -1088,13 +1095,13 @@ static int cm36283_turn_onoff_als(bool bOn)
 
     printk(DBGMSK_PRX_G3"[cm36283][als]++Turn onoff ambient sensor\n");
 
-    if(g_cm36283_als_switch_on != bOn) {
-
+    if(g_cm36283_als_switch_on != bOn || g_cm36283_reset==1) {
         if(1 == bOn) //turn on ambient sensor.
         { 
             printk(DBGMSK_PRX_G3"[cm36283][als] Turn on ambient sensor\n");
+	    g_cm36283_light_first=1;
 
-            if(g_cm36283_switch_earlysuspend==1) {
+            if(g_ambient_suspended==1) {
                 printk(DBGMSK_PRX_G3"[cm36283][als]senosr_switch_on: switch on later when late_resume.\n");
                 g_ambient_suspended = 1;   //set 1 that late_resume func will turn on als
 
@@ -1113,10 +1120,12 @@ static int cm36283_turn_onoff_als(bool bOn)
 
                 if(err < 0) {
                     printk(DBGMSK_PRX_G0"[cm36283][als] (%s): reg=0x%x, data=0x%x, err=%d\n", __FUNCTION__, data[0], data[1], err);
+		    g_cm36283_on_fail=1;
                 }
 
                 else    {
                     printk(DBGMSK_PRX_G3"[cm36283][als] set initial config, reg=0x%x, value=0x%x\n",data[0], data[1]);
+		    g_cm36283_on_fail=0;
                 }
     
                 //set interrupt high threshold 0x01
@@ -1146,7 +1155,7 @@ static int cm36283_turn_onoff_als(bool bOn)
                 }
 
 		  //Get Lux when light sensor turn on.
-		  //queue_work(cm36283_workqueue, &cm36283_light_interrupt_work);
+		  queue_delayed_work(cm36283_delay_workqueue, &cm36283_light_interrupt_delay_work,20);
 
                 g_cm36283_als_switch_on = 1;
                 printk("[cm36283][als] turn on\n");
@@ -1159,6 +1168,8 @@ static int cm36283_turn_onoff_als(bool bOn)
                 err = waitqueue_active(&ambient_wq_head);
                 printk(DBGMSK_PRX_G3"[cm3tu6283][als] ambient_wq_head(%d)\n", err);
 
+		g_cm36283_light_first=1;
+		
                 if(g_ambient_suspended == 1) {
                     printk(DBGMSK_PRX_G3"[cm36283][als] switch off was done in early_suspend.\n");
                     g_cm36283_als_switch_on = 0;
@@ -1345,7 +1356,7 @@ static unsigned int ambientDev_poll(struct file *filep, poll_table * wait)
 //  if(g_ambient_dbg==1)
 //  printk("[cm36283]: ambientdl_dev_poll++\n");
 
-    if(g_cm36283_switch_earlysuspend==1 || g_cm36283_als_switch_on==0) {
+    if( g_cm36283_als_switch_on==0) {
 //      if(g_ambient_dbg==1)
         printk(DBGMSK_PRX_G0"[cm36283][als] ambientdl_dev_poll-- not ready\n");
         return 0;
@@ -1489,6 +1500,29 @@ static int proximity_als_turn_on(int bOn)
     printk(DBGMSK_PRX_G2"[cm36283]turn on/off, status:0x%x (bitwise)\n", status);
 
     return status;
+}
+
+static void gpio_proximity_onoff(void)
+{
+    printk("[cm36283][isr] GPIO PWR ON/OFF: g_HAL_als_switch_on=%d, g_proxm_switch_on=%d ++\n", g_HAL_als_switch_on, g_proxm_switch_on);
+    gpio_set_value(GPIO_PROXIMITY_PWR_EN, 0);
+    msleep(1);
+    gpio_set_value(GPIO_PROXIMITY_PWR_EN, 1);	
+    msleep(5);
+
+    g_cm36283_reset = 1;
+
+    if (g_HAL_als_switch_on == 1) 
+	cm36283_turn_onoff_als(1);
+    
+    if(g_proxm_switch_on == 1) {
+	cm36283_turn_onoff_proxm(1);
+	queue_work(cm36283_workqueue, &cm36283_proximity_interrupt_work);
+    }
+	
+    g_cm36283_reset = 0;
+
+    return;
 }
 
 static int atd_write_status_and_adc_2(int *als_sts, int *als_adc, int *ps_sts)
@@ -1675,27 +1709,20 @@ static irqreturn_t als_proxm_interrupt_handler(int irq, void *dev_id)
 static void cm36283_interrupt_handler(struct work_struct *work)
 {
 	int ret = 0;
-	int indx = 0;
 	unsigned char buff[2] = {0,0};
 
-	if ((g_proxm_switch_on == 1) || (g_HAL_als_switch_on == 1) || (g_cm36283_switch_earlysuspend == 1))	{	//consider autosuspend in phone mode
+	if ((g_proxm_switch_on == 1) || (g_HAL_als_switch_on == 1) || (g_ambient_suspended == 1))	{	//consider autosuspend in phone mode
 		//qup_i2c_resume(proximity_dev);
-		for(indx = 0; indx<5; indx++) {
-			ret = cm36283_read_reg(cm36283_client, CM36283_INT_FLAGS, 2, &buff);
-			if( (buff[1] & 0x30) != 0 || (buff[1] & 0x03) != 0 || (buff[1] & 0x40) != 0 ) {
-				printk(DBGMSK_PRX_G2"[cm36283][isr] INT_FLAG =(0x%x)\n", buff[1]);
-				break;
-			}else if ( g_cm36283_switch_earlysuspend )	{
-				printk("[cm36283][isr] Resume & clean interrupt INT_FLAG =(0x%x),%d\n", buff[1], indx);
-				break;			
-			}else	{
-				printk("[cm36283][isr] INT_FLAG =(0x%x), i2c error retry = %d\n",buff[1],indx);
-				msleep(10);
-			}
-		}
-		if (indx == 5) {
-			return;
-		}
+		ret = cm36283_read_reg(cm36283_client, CM36283_INT_FLAGS, 2, &buff);
+		if( (buff[1] & 0x30) != 0 || (buff[1] & 0x03) != 0 || (buff[1] & 0x40) != 0 ) {
+			printk(DBGMSK_PRX_G2"[cm36283][isr] INT_FLAG =(0x%x)\n", buff[1]);
+		}else if (g_ambient_suspended)	{
+			printk("[cm36283][isr] Resume & clean interrupt INT_FLAG =(0x%x)\n", buff[1]);
+		}else if (ret < 0) {
+			printk("[cm36283][isr] INT_FLAG =(0x%x), i2c error retry\n",buff[1]);
+			gpio_proximity_onoff();
+		}else 
+			printk("[cm36283][isr] No Interrupt, INT_FLAG =(0x%x)\n",buff[1]);
 	}
 
 	if((buff[1] & 0x30) != 0)
@@ -1746,11 +1773,19 @@ static void light_interrupt_work(struct work_struct *work)
 
 	g_als_threshold_lo = ((g_msb_thd[g_level]<<8) | g_lsb_thd[g_level]);
 
-	if(g_cm36283_light != g_last_cm36283_light) {
+	if(g_cm36283_light != g_last_cm36283_light || g_cm36283_light_first) {
 		g_last_cm36283_light = g_cm36283_light;
 		als_lux_report_event(g_cm36283_light);
+		g_cm36283_light_first=0;
 	}
 
+	if(g_proxm_switch_on==1) {
+		if(g_ambient_suspended==1) 
+			g_cm36283_earlysuspend_int = 1;		
+		if (g_cm36283_reset != 1)
+			queue_work(cm36283_workqueue, &cm36283_proximity_interrupt_work);
+	}
+	
 	if(g_proxim_state == 1) 
 		wake_unlock(&proximity_wake_lock);
 	return;
@@ -2458,62 +2493,24 @@ static struct i2c_test_case_info gLSensorTestCaseInfo[] =
 #ifdef CONFIG_HAS_EARLYSUSPEND
 static void cm36283_early_suspend(struct early_suspend *handler)
 {
-	int err = 1;
-	struct i2c_msg msg[1];
-	unsigned char data[2] = {0,0};
+	printk("[cm36283] ++ cm36283_early_suspend, psensor:%d, als:%d\n", g_proxm_switch_on, g_cm36283_als_switch_on);
+	g_cm36283_switch_earlysuspend=1;
 
-	printk("[cm36283] ++cm36283_early_suspend, psensor:%d, als:%d\n", g_proxm_switch_on, g_cm36283_als_switch_on);
-
-	g_cm36283_switch_earlysuspend = 1;
-
-	enable_irq_wake(g_cm36283_device.irq);
-
-	if(g_cm36283_als_switch_on==1) {
-
-		//In case upper layer doesn't switch off ambient before early_suspend.
-		g_cm36283_als_switch_on = 0;
-		g_ambient_suspended = 1;
-
-		printk(DBGMSK_PRX_G2"[cm36283] cm36283_early_suspend, turn off ambient\n");
-
-		//0x00_L
-		msg->addr = cm36283_client->addr;
-		msg->flags = 0;
-		msg->len = 2;
-		msg->buf = data;
-		data[0] = CM36283_ALS_CONF;
-		data[1] = (INIT_ALS | 0x1);
-
-		err = i2c_transfer(cm36283_client->adapter, msg, ARRAY_SIZE(msg));
-
-		if(err != 1)
-			printk(DBGMSK_PRX_G0"[cm36283] (%s): reg=0x%x data=0x%x err=%d\n",__FUNCTION__ ,data[0], data[1], err);
-		else
-			printk(DBGMSK_PRX_G2"[cm36283] als_config=0x%x, data=0x%x\n",data[0], data[1]);
-	}
-	printk("[cm36283] --cm36283_early_suspend\n");
+	return;
 }
 
 
 static void cm36283_late_resume(struct early_suspend *handler)
 {
 
-    printk("[cm36283] ++cm36283_late_resume, psensor:%d, als:%d\n", g_proxm_switch_on, g_cm36283_als_switch_on);
+    printk("[cm36283] ++cm36283_late_resume, g_cm36283_on_fail:%d\n",g_cm36283_on_fail);
 
-	printk("[cm36283][als] late_resume: g_ambient_suspended = %d\n",g_ambient_suspended);
-    if(g_ambient_suspended==1) {
-        g_cm36283_switch_earlysuspend=0;  //disable this flag for cm36283_turn_onoff_als to turn on als
-		if ( !g_bIsP01Attached )
-        cm36283_turn_onoff_als(1);
-
-        g_ambient_suspended = 0;
-        g_cm36283_als_switch_on = 1; //this flag is usually changed in put_property.
+    if(g_cm36283_on_fail==1) {
+	if ( !g_bIsP01Attached )
+        	cm36283_turn_onoff_als(1);
         printk("[cm36283][als] late_resume: apply ALS interrupt mode\n");
     }
-
-    disable_irq_wake(g_cm36283_device.irq);
     g_cm36283_switch_earlysuspend=0;
-    g_cm36283_earlysuspend_int = 0;
 
     printk(DBGMSK_PRX_G2"[cm36283]--cm36283_late_resume\n");
 }
@@ -2561,6 +2558,7 @@ static int init_cm36283(void)
 
 	Proximity_test_wq = create_workqueue("Proximity_test_work");
 	cm36283_workqueue = create_singlethread_workqueue("cm36283_wq");
+	cm36283_delay_workqueue = create_singlethread_workqueue("cm36283_delay_wq");
 
 
 	INIT_WORK(&cm36283_ISR_work, cm36283_interrupt_handler);
@@ -2568,6 +2566,7 @@ static int init_cm36283(void)
 	INIT_WORK(&cm36283_proximity_interrupt_work, proximity_interrupt_work);
 	INIT_WORK(&cm36283_attached_Pad_work, cm36283_lightsensor_attached_pad);
 	INIT_DELAYED_WORK( &Proximity_test_work, Proximity_test_delayed_work);
+	INIT_DELAYED_WORK( &cm36283_light_interrupt_delay_work, light_interrupt_work);
 
 	wake_lock_init(&proximity_wake_lock, WAKE_LOCK_SUSPEND, "proxm_wake_lock");
 
@@ -2776,8 +2775,39 @@ static int cm36283_remove(struct i2c_client *client)
 
 
 static int cm36283_suspend(struct i2c_client *client, pm_message_t mesg)
-{
-    return 0 ;
+{    
+	int err = 1;
+	struct i2c_msg msg[1];
+	unsigned char data[2] = {0,0};
+
+	printk("[cm36283] ++cm36283_early_suspend, psensor:%d, als:%d\n", g_proxm_switch_on, g_cm36283_als_switch_on);
+
+	enable_irq_wake(g_cm36283_device.irq);
+
+	if(g_cm36283_als_switch_on==1) {
+		//In case upper layer doesn't switch off ambient before early_suspend.
+		g_cm36283_als_switch_on = 0;
+		g_ambient_suspended = 1;
+
+		printk(DBGMSK_PRX_G2"[cm36283] cm36283_early_suspend, turn off ambient\n");
+
+		//0x00_L
+		msg->addr = cm36283_client->addr;
+		msg->flags = 0;
+		msg->len = 2;
+		msg->buf = data;
+		data[0] = CM36283_ALS_CONF;
+		data[1] = (INIT_ALS | 0x1);
+
+		err = i2c_transfer(cm36283_client->adapter, msg, ARRAY_SIZE(msg));
+
+		if(err != 1)
+			printk(DBGMSK_PRX_G0"[cm36283] (%s): reg=0x%x data=0x%x err=%d\n",__FUNCTION__ ,data[0], data[1], err);
+		else
+			printk(DBGMSK_PRX_G2"[cm36283] als_config=0x%x, data=0x%x\n",data[0], data[1]);
+	}
+	printk("[cm36283] --cm36283_early_suspend\n");
+	return 0;
 }
 
 
@@ -2791,6 +2821,20 @@ static int cm36283_resume(struct i2c_client *client)
 		if (g_proxim_state == 1)
 			wake_lock_timeout(&proximity_wake_lock, 1 * HZ);
 	}
+
+	printk("[cm36283][als] resume: g_ambient_suspend = %d\n", g_ambient_suspended);
+	if(g_ambient_suspended==1) {
+		if(!g_bIsP01Attached) {
+			g_ambient_suspended = 0;
+			cm36283_turn_onoff_als(1);
+		}
+		g_ambient_suspended = 0;
+		g_cm36283_als_switch_on = 1;
+		printk("[cm36283][als] resume: apply ALS interrupt mode\n");
+	}
+
+	disable_irq_wake(g_cm36283_device.irq);
+	g_cm36283_earlysuspend_int=0;
 
 	printk(DBGMSK_PRX_G2"[cm36283]--cm36283_resume\n");
     return 0 ;
@@ -2915,5 +2959,4 @@ MODULE_AUTHOR("ASUS");
 MODULE_DESCRIPTION("CAPELLA CM36283 proximity sensor with ALS");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("0.1");
-
 

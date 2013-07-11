@@ -1,4 +1,4 @@
-cmd_scripts/kallsyms := gcc -Wp,-MD,scripts/.kallsyms.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -fomit-frame-pointer    -I/home/flint/src_pf2/PF2-10.4.15.1-kernel-src/tools/include  -o scripts/kallsyms scripts/kallsyms.c  
+cmd_scripts/kallsyms := gcc -Wp,-MD,scripts/.kallsyms.d -w -O3 -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer    -I/home/flint/src_pf2/StoneK_10.4.16.8/tools/include  -o scripts/kallsyms scripts/kallsyms.c  
 
 source_scripts/kallsyms := scripts/kallsyms.c
 

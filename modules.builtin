@@ -9,12 +9,7 @@ kernel/arch/arm/mach-msm/lpass-8960.ko
 kernel/arch/arm/mach-msm/wcnss-ssr-8960.ko
 kernel/arch/arm/mach-msm/bms-batterydata.ko
 kernel/arch/arm/mach-msm/bms-batterydata-desay.ko
-kernel/arch/arm/mach-msm/rpm_stats.ko
-kernel/arch/arm/mach-msm/rpm_rbcpr_stats.ko
-kernel/arch/arm/mach-msm/rpm_log.ko
-kernel/arch/arm/mach-msm/tz_log.ko
 kernel/arch/arm/mach-msm/hsic_sysmon.ko
-kernel/arch/arm/mach-msm/cpufreq_limit.ko
 kernel/kernel/configs.ko
 kernel/fs/mbcache.ko
 kernel/fs/cifs/cifs.ko
@@ -369,7 +364,6 @@ kernel/drivers/scsi/sd_mod.ko
 kernel/drivers/scsi/sg.ko
 kernel/drivers/scsi/ch.ko
 kernel/drivers/slimbus/slim-msm-ctrl.ko
-kernel/drivers/staging/android/logger.ko
 kernel/drivers/staging/android/timed_gpio.ko
 kernel/drivers/staging/qcache/qcache.ko
 kernel/drivers/switch/switch_class.ko
@@ -380,6 +374,7 @@ kernel/drivers/tty/serial/serial_core.ko
 kernel/drivers/tty/serial/msm_serial_hs_lite.ko
 kernel/drivers/usb/usb-common.ko
 kernel/drivers/usb/class/cdc-acm.ko
+kernel/drivers/usb/class/usblp.ko
 kernel/drivers/usb/class/cdc-wdm.ko
 kernel/drivers/usb/core/usbcore.ko
 kernel/drivers/usb/gadget/udc-core.ko
@@ -409,11 +404,7 @@ kernel/drivers/video/fb.ko
 kernel/drivers/video/cfbfillrect.ko
 kernel/drivers/video/cfbcopyarea.ko
 kernel/drivers/video/cfbimgblt.ko
-kernel/drivers/video/sysfillrect.ko
-kernel/drivers/video/syscopyarea.ko
-kernel/drivers/video/sysimgblt.ko
-kernel/drivers/video/fb_sys_fops.ko
-kernel/drivers/video/vfb.ko
+kernel/drivers/video/backlight/lcd.ko
 kernel/drivers/video/backlight/backlight.ko
 kernel/drivers/video/backlight/generic_bl.ko
 kernel/drivers/video/msm/vidc/vidc_vdec.ko
@@ -430,6 +421,7 @@ kernel/sound/soc/codecs/snd-soc-wcd9304.ko
 kernel/sound/soc/codecs/snd-soc-wcd9310.ko
 kernel/sound/soc/codecs/snd-soc-cs8427.ko
 kernel/sound/soc/codecs/snd-soc-msm-stub.ko
+kernel/sound/soc/codecs/sound_control_gpl.ko
 kernel/sound/soc/msm/msm-dai-q6-hdmi.ko
 kernel/sound/soc/msm/snd-soc-qdsp6.ko
 kernel/sound/soc/msm/snd-soc-msm8960.ko
@@ -502,7 +494,6 @@ kernel/net/ipv6/netfilter/ip6t_REJECT.ko
 kernel/net/key/af_key.ko
 kernel/net/netfilter/nfnetlink.ko
 kernel/net/netfilter/nfnetlink_queue.ko
-kernel/net/netfilter/nfnetlink_log.ko
 kernel/net/netfilter/nf_conntrack.ko
 kernel/net/netfilter/nf_conntrack_proto_dccp.ko
 kernel/net/netfilter/nf_conntrack_proto_gre.ko
@@ -525,7 +516,6 @@ kernel/net/netfilter/xt_tcpudp.ko
 kernel/net/netfilter/xt_mark.ko
 kernel/net/netfilter/xt_connmark.ko
 kernel/net/netfilter/xt_CLASSIFY.ko
-kernel/net/netfilter/xt_LOG.ko
 kernel/net/netfilter/xt_NFQUEUE.ko
 kernel/net/netfilter/xt_comment.ko
 kernel/net/netfilter/xt_connlimit.ko

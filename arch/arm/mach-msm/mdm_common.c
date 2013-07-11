@@ -683,6 +683,10 @@ int mdm_common_create(struct platform_device  *pdev,
 	}
 	mdm_drv->mdm_errfatal_irq = irq;
 
+	//ASUS_BSP+++ BennyCheng "setup mdm2ap_errfatal(gpio 19) as wakeup source"
+	enable_irq_wake(mdm_drv->mdm_errfatal_irq);
+	//ASUS_BSP--- BennyCheng "setup mdm2ap_errfatal(gpio 19) as wakeup source"
+
 errfatal_err:
 
 	/* status irq */
@@ -705,6 +709,10 @@ errfatal_err:
 		goto status_err;
 	}
 	mdm_drv->mdm_status_irq = irq;
+
+	//ASUS_BSP+++ BennyCheng "setup mdm2ap_status pin(gpio 49) as wakeup source"
+	enable_irq_wake(mdm_drv->mdm_status_irq);
+	//ASUS_BSP--- BennyCheng "setup mdm2ap_status pin(gpio 49) as wakeup source"
 
 status_err:
 	if (mdm_drv->mdm2ap_pblrdy > 0) {

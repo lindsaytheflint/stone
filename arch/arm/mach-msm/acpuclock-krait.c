@@ -435,8 +435,6 @@ static int acpuclk_krait_set_rate(int cpu, unsigned long rate,
 		mutex_lock(&driver_lock);
 
 	strt_acpu_s = drv.scalable[cpu].cur_speed;
-#ifdef CONFIG_CPU_FIXLIMITS
-#endif
 
 	/* Return early if rate didn't change. */
 	if (rate == strt_acpu_s->khz)
@@ -910,9 +908,8 @@ ssize_t acpuclk_set_vdd2(char *buf)
 }
 #endif  /* CONFIG_CPU_VOLTAGE_TABLE */
 
-
 #ifdef CONFIG_CPU_FREQ_MSM
-static struct cpufreq_frequency_table freq_table[NR_CPUS][35];
+static struct cpufreq_frequency_table freq_table[NR_CPUS][36];
 
 static void __init cpufreq_table_init(void)
 {
@@ -1132,7 +1129,13 @@ static void __init hw_init(void)
 
 	bus_init(l2_level);
 #ifdef CONFIG_CPU_LIMITDURINGBOOT
-	acpuclk_krait_set_rate(0, 1458000, SETRATE_CPUFREQ);
+//	for_each_possible_cpu(cpu) {
+//		acpuclk_krait_set_rate(cpu, 1458000, SETRATE_CPUFREQ);
+//	}
+	acpuclk_krait_set_rate(0, 1512000, SETRATE_CPUFREQ);
+	acpuclk_krait_set_rate(1, 486000, SETRATE_CPUFREQ);
+	acpuclk_krait_set_rate(2, 486000, SETRATE_CPUFREQ);
+	acpuclk_krait_set_rate(3, 486000, SETRATE_CPUFREQ);
 #endif
 }
 

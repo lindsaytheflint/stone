@@ -183,6 +183,27 @@ config CPU_FREQ_GOV_INTERACTIVE
 
 	  If in doubt, say N.
 
+config CPU_FREQ_GOV_INTERACTIVEX
+	tristate "'interactiveX' cpufreq policy governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_HOTPLUGX
+	tristate "'hotplugX' cpufreq policy governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_PEGASUSQ
+	tristate "'pegasusq' cpufreq policy governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_SMARTASS2
+	tristate "'smartass2' cpufreq policy governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_WHEATLEY
+	tristate "'wheatley' cpufreq policy governor"
+	depends on CPU_FREQ
+
+
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"
 	depends on CPU_FREQ

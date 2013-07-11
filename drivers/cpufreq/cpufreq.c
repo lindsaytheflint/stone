@@ -593,10 +593,6 @@ static ssize_t store_scaling_setspeed(struct cpufreq_policy *policy,
 		return -EINVAL;
 
 	policy->governor->store_setspeed(policy, freq);
-//#ifdef CONFIG_CPU_FIXLIMITS
-//	policy->governor->store_setspeed(policy, freq);
-//#endif
-
 	return count;
 }
 
@@ -946,11 +942,7 @@ static int cpufreq_add_dev_policy(unsigned int cpu,
 		policy->user_policy.min = policy->min;
 	}
 	if (per_cpu(cpufreq_policy_save, cpu).max) {
-#ifdef CONFIG_CPU_FIXLIMITS
-		policy->max = 1674000; //LF
-#else
 		policy->max = per_cpu(cpufreq_policy_save, cpu).max;
-#endif
 		policy->user_policy.max = policy->max;
 	}
 	pr_debug("Restoring CPU%d min %d and max %d\n",

@@ -46,7 +46,8 @@
 extern struct msm_sensor_ctrl_t imx091_s_ctrl;
 extern int imx091_power_up(const struct msm_camera_sensor_info *data, bool ISPbootup);
 extern int imx091_power_down(const struct msm_camera_sensor_info *data, bool ISPbootup);
-
+extern unsigned char g_mi1040_power;
+    
 #define I7002A_SDEV_NAME "camera"
 
 #define SPI_CMD_BYTE_READ 	0x03
@@ -89,6 +90,7 @@ static bool g_enable_roi_debug = false; //ASUS_BSP LiJen "[A68][13M][NA][Others]
 static int dbg_i7002a_page_index = 2047;
 static bool g_afmode=0; //0: Auto AF, 1:Full search AF
 static int g_flash_mode = 0;	//ASUS_BSP Stimber "Flash mode for EXIF"
+static int g_LastVideoMode = 0; // ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
 
 /* iCatch Camera Firmware Header
  * It locates on the end of the bin file.
@@ -136,6 +138,7 @@ static u32 single_image = 0;	//ASUS_BSP Stimber "Interface for single image"
 static bool g_TAEenable = 0;	//0: Disable, 1:Enable
 
 static int g_is_hdr_on = 0;	//0: Disable, 1:Enable //ASUS_BSP stimber "Implement HDR feature"
+static int g_is_nr_on = 0;	//0: Disable, 1:Enable //ASUS_BSP stimber "Implement NR feature"
 static bool  is_calibration_table_set = false;
 static bool g_isAFCancel = false;
 bool g_isAFDone = true;
@@ -150,6 +153,7 @@ static int g_LastMiniISO = 0;
 struct completion g_iCatch_comp;
 static bool caf_mode = false;
 static int g_pre_res = MSM_SENSOR_INVALID_RES;
+int g_cur_res = MSM_SENSOR_INVALID_RES;
 
 enum iCatch_fw_update_status{
 	ICATCH_FW_UPDATE_SUCCESS,
@@ -157,6 +161,25 @@ enum iCatch_fw_update_status{
 	ICATCH_FW_IS_BURNING,	
        ICATCH_FW_NO_CMD,
 };
+
+// ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate" +++
+void setCaptureVideoMode(int settingVal)
+{
+        int default_value = 0x00;
+
+        if (settingVal == DEFAULT_SETTING) { //restore to default value
+                if (g_LastVideoMode != DEFAULT_SETTING) { // Need to restore
+                        sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7132, default_value);// clear to restore
+                        g_LastVideoMode = DEFAULT_SETTING;
+                } //else: regValue==g_LastVideoMode==default value : do nothing
+        } // if settingVal == DEFAULT_SETTING
+        else {
+                sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7132, settingVal);
+                g_LastVideoMode = settingVal;
+        } // else
+} // void setCaptureVideoMode()
+// ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate" ---
+
 static enum iCatch_fw_update_status fw_update_status = ICATCH_FW_NO_CMD;
 
 enum iCatch_flash_type{
@@ -234,7 +257,7 @@ int sensor_write_reg(struct i2c_client *client, u16 addr, u16 val)
 		       addr, val);
 //		pr_err("yuv_sensor : i2c transfer failed, count %x, err= 0x%x\n",
 //		       __FUNCTION__, __LINE__, msg.addr, err);
-		msleep(1); //LiJen: add delay to avoid ISP i2c fail issue
+		msleep(1); //LiJen: increate i2c retry delay to avoid ISP i2c fail issue
 	} while (retry <= SENSOR_MAX_RETRIES);
 
 	if(err == 0) {
@@ -1156,6 +1179,39 @@ static int sensor_write_reg_bytes(struct i2c_client *client, u16 addr, unsigned 
 	return err;
 }
 
+int sensor_read_reg_bytes(struct i2c_client *client, u16 addr, unsigned char* val, u32 bytes)
+{
+	int err;
+	struct i2c_msg msg[2];
+	unsigned char data[bytes+2];
+	if (!client->adapter)
+		return -ENODEV;
+
+	msg[0].addr = client->addr;
+	msg[0].flags = 0;
+	msg[0].len = 2;
+	msg[0].buf = data;
+
+	/* high byte goes out first */
+	data[0] = (u8) (addr >> 8);
+	data[1] = (u8) (addr & 0xff);
+
+	msg[1].addr = client->addr;
+	msg[1].flags = I2C_M_RD;
+
+	msg[1].len = bytes;
+	msg[1].buf = data + 2;
+
+	err = i2c_transfer(client->adapter, msg, 2);
+       
+	if (err != 2)
+		return -EINVAL;
+
+	memcpy(val, data+2, bytes);
+
+	return 0;
+}
+
 u32 I2C_7002DmemWr(
 	u32 bankNum,
 	u32 byteNum,
@@ -1483,7 +1539,7 @@ BB_EraseSPIFlash(
 	else if(spiSize == (1024*1024))
 	{
 		/* only erase 256*3KB */
-		temp1 = ((spiSize*3/4) / 0x10000)-1;
+		temp1 = ((spiSize*3/4) / 0x10000);
 		for(i=0;i<temp1;i++)
 		{
 			I2C_SPI64KBBlockErase(i*0x10000,typeFlag);
@@ -1715,7 +1771,10 @@ irqreturn_t iCatch_irq_handler(int irq, void *data)
 
 void iCatch_debug(void)
 {
-    u16 readval;
+    u16 readval, i;
+    u32 read_bytes=128;
+    unsigned char read_data[read_bytes];
+       
     pr_info("%s +++\n",__func__);
     sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x007a, &readval);
     pr_info("%s reg(0x007a)=0x%x\n",__func__,readval);
@@ -1745,6 +1804,13 @@ void iCatch_debug(void)
     pr_info("%s reg(0x90cf)=0x%x\n",__func__,readval);   
     sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x72f8, &readval);
     pr_info("%s reg(0x72f8)=0x%x\n",__func__,readval); 
+
+    //Get ISP Status
+    sensor_read_reg_bytes(imx091_s_ctrl.sensor_i2c_client->client, 0x7200, read_data, read_bytes);
+    for(i=0;i<read_bytes;i++){
+        pr_info("%s reg(0x72%2x)=0x%x\n",__func__,i, read_data[i]);     
+    }
+    
     pr_info("%s ---\n",__func__);
 }
 
@@ -1919,14 +1985,17 @@ void setMiniISO(int settingVal)
 
 int sensor_set_mode(int  res)
 {
+       bool l_edgeExifEnable = false;
+       
        //burst capture abort
        if((MSM_SENSOR_RES_FULL_BURST_CAPTURE == g_pre_res
-             || MSM_SENSOR_RES_10M_BURST_CAPTURE == g_pre_res)
+             || MSM_SENSOR_RES_10M_BURST_CAPTURE == g_pre_res
+             || (MSM_SENSOR_RES_FULL_SINGLE_CAPTURE == g_pre_res && g_is_nr_on))
              && g_pre_res != res){
              pr_info("%s: Burst capture abort\n",__func__);
              sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7122, 0x01);
        }
-
+       
        switch(res){
             case MSM_SENSOR_RES_QTR:            //MODE_1
                 pr_info("%s: MODE_1\n",__func__);
@@ -1941,6 +2010,7 @@ int sensor_set_mode(int  res)
                 setFixFPS(0);
                 setMaxExp(30);
                 setMiniISO(0);
+		setCaptureVideoMode(0); //default : capture preview mode, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
                 
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7106, 0x06);//preview resolution
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x00);//swtich preview mode  
@@ -1952,6 +2022,7 @@ int sensor_set_mode(int  res)
                 setFixFPS(0);
                 setMaxExp(30);
                 setMiniISO(400);
+		setCaptureVideoMode(2); //High speed video preview mode, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
                 
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7106, 0x05);//preview resolution
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x00);//swtich preview mode 
@@ -1963,6 +2034,7 @@ int sensor_set_mode(int  res)
                 setFixFPS(0);
                 setMaxExp(30);
                 setMiniISO(400);
+		setCaptureVideoMode(2); //High speed video preview mode, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
                 
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7106, 0x02);//preview resolution
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x00);//swtich preview mode 
@@ -1971,10 +2043,11 @@ int sensor_set_mode(int  res)
             case MSM_SENSOR_RES_FULL:           //MODE_4
                 pr_info("%s: MODE_4\n",__func__);
 
-                setFixFPS(0);
+				 setFixFPS(0);
                 setMaxExp(0);
                 setMiniISO(0);
-                
+		setCaptureVideoMode(3); //Zsl capture, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
+
 	            sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7106, 0x08);//preview resolution
 	            sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x00);//swtich preview mode          
 
@@ -1985,6 +2058,7 @@ int sensor_set_mode(int  res)
                 setFixFPS(0);
                 setMaxExp(0);
                 setMiniISO(0);
+		setCaptureVideoMode(3); //Zsl capture, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
                 
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7106, 0x07);//preview resolution
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x00);//swtich preview mode              
@@ -1993,9 +2067,10 @@ int sensor_set_mode(int  res)
             case MSM_SENSOR_RES_HYBRID:     //MODE_6
                 pr_info("%s: MODE_6\n",__func__);
                 
-                setFixFPS(24);
+                setFixFPS(0);
                 setMaxExp(0);
                 setMiniISO(0);
+		setCaptureVideoMode(1); //Normal video preview mode, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
                 
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7106, 0x09);//preview resolution
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x00);//swtich preview mode
@@ -2013,6 +2088,7 @@ int sensor_set_mode(int  res)
                 setFixFPS(0);
                 setMaxExp(0);
                 setMiniISO(0);
+		setCaptureVideoMode(3); //Zsl capture, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
                     
                 if(g_is_hdr_on){ //HDR
                     pr_info("[Camera] HDR mode\n");
@@ -2021,6 +2097,14 @@ int sensor_set_mode(int  res)
 		      
                     sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x710f, 0x01);//capture mode - HDR
                     sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x01);//swtich capture mode
+                }else if(g_is_nr_on){ //NR
+                    pr_info("[Camera] NR mode\n");
+                    sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x710f, 0x03);//swtich burst capture mode
+                    if(MSM_SENSOR_RES_FULL == g_pre_res){
+                        sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x02);//swtich capture flash mode
+                    }else{
+                     	sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x03);//swtich capture flash mode
+                    } 
                 }else{
                      sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x710f, 0x00);//swtich single capture mode
                      if(MSM_SENSOR_RES_FULL == g_pre_res){
@@ -2037,6 +2121,7 @@ int sensor_set_mode(int  res)
                 setFixFPS(0);
                 setMaxExp(0);
                 setMiniISO(0);
+		setCaptureVideoMode(3); //Zsl capture, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
                 
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x710f, 0x03);//swtich burst capture mode
                      if(MSM_SENSOR_RES_FULL == g_pre_res){
@@ -2052,6 +2137,7 @@ int sensor_set_mode(int  res)
                 setFixFPS(0);
                 setMaxExp(0);
                 setMiniISO(0);
+		setCaptureVideoMode(3); //Zsl capture, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
                 
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x710f, 0x03);//swtich burst capture mode
                 sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7120, 0x02);//swtich capture flash mode  
@@ -2069,6 +2155,35 @@ int sensor_set_mode(int  res)
             set_isp_calibration_table(0x01);
        }else{
        	wait_for_next_frame();	
+       }
+
+       //Enable EXIF                  
+
+       // enableExif: when res is not equal to mode 1, mode2, mode3, mode6
+       if(res == MSM_SENSOR_RES_QTR ||
+          res == MSM_SENSOR_RES_4BIN ||
+          res == MSM_SENSOR_RES_FULL_HD ||
+          res == MSM_SENSOR_RES_HYBRID){
+
+            l_edgeExifEnable = false;
+       }else{
+
+            l_edgeExifEnable = true;
+       }
+    
+       if(res == MSM_SENSOR_RES_QTR ||
+          res == MSM_SENSOR_RES_FULL ||
+          res == MSM_SENSOR_RES_10M){
+
+            iCatch_enable_exif(l_edgeExifEnable  , true);
+       }else if(res == MSM_SENSOR_RES_FULL_SINGLE_CAPTURE ||
+          res == MSM_SENSOR_RES_FULL_BURST_CAPTURE ||
+          res == MSM_SENSOR_RES_10M_BURST_CAPTURE){
+
+            iCatch_enable_exif(l_edgeExifEnable, false);
+       }else{
+
+            iCatch_enable_exif(false, false);
        }
         
        g_pre_res = res;                
@@ -3914,7 +4029,10 @@ void iCatch_set_general_cmd(struct general_cmd_cfg *cmd)
                     break;
 		case GENERAL_CMD_HDR:	
 			g_is_hdr_on = cmd->cmd_value;	//ASUS_BSP Stimber "Implement HDR feature"
-                    break;                    
+                    break;  
+        case GENERAL_CMD_NR:	
+			g_is_nr_on = cmd->cmd_value;	//ASUS_BSP Stimber "Implement NR feature"
+                    break;
 		case GENERAL_CMD_GYRO:	
                     if(cmd->cmd_value == 1){    // GRYO detect Moving
                         //sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x7126, 0x01);
@@ -3938,11 +4056,13 @@ void iCatch_set_general_cmd(struct general_cmd_cfg *cmd)
 				setFixFPS(30);  //fix 30 fps
                 setMaxExp(0);   //reset max exp.
                 setMiniISO(0);  //reset min iso to default
+		setCaptureVideoMode(2); //High speed video preview mode, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
 			}else{
 				pr_info("Dynamic fps\n");
 				setFixFPS(0);   //reset fps fix
                 setMaxExp(30);  //set max exp. to 1/30
                 setMiniISO(0);  //reset min iso to default
+		setCaptureVideoMode(0); //default : capture preview mode, ASUS_BSP jim3_lin "Modify binning sum for camera preview/video frame rate"
 			}
 			break;
 		default:
@@ -3996,9 +4116,56 @@ void iCatch_checkAFMode(void)
 }
 
 //ASUS_BSP +++ Stimber "Implement EXIF info for camera with ISP"
+void iCatch_enable_edge(bool enable, bool is_preExif)
+{
+       u16 read_byte = 0, write_byte = 0;
+
+        sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x729b, &read_byte);
+        if(enable){
+		     write_byte = read_byte | 0x02;
+		}else{
+		     write_byte = read_byte & (~0x02);
+		}
+        
+		if(is_preExif){
+		     write_byte = write_byte | 0x04;
+		}else{
+		     write_byte = write_byte & (~0x04);
+		}
+        sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x711b, write_byte);       
+}
+
+void iCatch_enable_exif(bool enable, bool is_preExif)
+{
+        if (enable) {
+           //enable edge information
+           iCatch_enable_edge(true, is_preExif);
+           
+           /* AE/AWB lock */
+    	    sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x71EB, 0x01);
+           msleep(8);  //LiJen: wait for ISP ready      
+        } else {
+           iCatch_enable_edge(false, is_preExif);
+        } 
+}
+
+bool iCatch_exif_flow_control(void)
+{
+    static int frame_count = 0; 
+    int rc = false;
+
+    if(++frame_count == FRAME_PERIOD){
+        frame_count = 0;
+        rc = true;
+    }else{
+        rc = false;
+    }
+    return rc;
+}
+
 void iCatch_get_exif(struct exif_cfg *exif)
 {
-	short iso;
+	short iso = 0;
 	u16 ISO_lowbyte = 0;
 	u16 ISO_highbyte = 0;
 	u16 et_numerator = 0;
@@ -4006,27 +4173,57 @@ void iCatch_get_exif(struct exif_cfg *exif)
 	u16 et_denominator_byte2 = 0;
 	u16 et_denominator_byte3 = 0;
 	u16 flash_mode;
+       u32 edge = 0;
 
-	/* AE/AWB lock */
-	sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x71EB, 0x01);
+       u32 exif_bytes;
+       unsigned char exif_data[14];
+       static int l_cnt=0;  //ASUS_BSP Stimber "Workaround for front camera to trigger exif"
+       if(g_cur_res == MSM_SENSOR_RES_FULL ||
+          g_cur_res == MSM_SENSOR_RES_10M ||
+          g_cur_res == MSM_SENSOR_RES_FULL_SINGLE_CAPTURE ||
+          g_cur_res == MSM_SENSOR_RES_FULL_BURST_CAPTURE ||
+          g_cur_res == MSM_SENSOR_RES_10M_BURST_CAPTURE ||
+          (g_mi1040_power == true && g_cur_res ==MSM_SENSOR_RES_FULL) ||
+          (g_cur_res == MSM_SENSOR_RES_QTR && iCatch_exif_flow_control())){
+            //pr_info("%s\n",__func__);
+       }else{
+            //pr_info("%s ignore\n",__func__);
 
-	//msleep(100);
-	
-    /* EXIF ISO */
-	sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x72b7, &ISO_lowbyte);
-	sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x72b8, &ISO_highbyte);
-	iso = (ISO_highbyte << 8) | ISO_lowbyte;
-	//printk("[EXIF] GET_ISO: [0x72b7]:0x%X; [0x72b8]:0x%X\n", ISO_lowbyte, ISO_highbyte);
+//ASUS_BSP +++ Stimber "Workaround for front camera to trigger exif"
+       if(++l_cnt%9==0 && g_mi1040_power == true && g_cur_res ==MSM_SENSOR_RES_QTR){
+           sensor_write_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x71EB, 0x01);
+           //msleep(8);  //LiJen: wait for ISP ready 
+           l_cnt=0;
+       }
+//ASUS_BSP +++ Stimber "Workaround for front camera to trigger exif"     
 
+            return;
+       }
+
+
+#if 0
+       if(g_flash_mode == 0 || g_flash_mode == 1){
+            exif_bytes = 9; //0x72b0~0x72b8
+       }else{
+            exif_bytes = 10; //0x72b0~0x72b9
+       }
+#else
+       exif_bytes = 14; //0x72b0~0x72bd  //enable edge information
+#endif
+
+       //Get EXIF information from ISP
+       sensor_read_reg_bytes(imx091_s_ctrl.sensor_i2c_client->client, 0x72b0, exif_data, exif_bytes);
 
 	/* EXIF Exposure time */
-	sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x72b0, &et_numerator);
-	sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x72b1, &et_denominator_byte1);
-	sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x72b2, &et_denominator_byte2);
-	sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x72b3, &et_denominator_byte3);
-	//printk("[EXIF] GET_ET: [0x72b0]:0x%X; [0x72b1]:0x%X\n", et_numerator, et_denominator_byte1);
-	//printk("[EXIF] GET_ET: [0x72b2]:0x%X; [0x72b3]:0x%X\n", et_denominator_byte2, et_denominator_byte3);
+       et_numerator = exif_data[0];
+       et_denominator_byte1 = exif_data[1];
+       et_denominator_byte2 = exif_data[2];
+       et_denominator_byte3 = exif_data[3];
 
+       /* EXIF ISO */
+       ISO_lowbyte = exif_data[7];
+       ISO_highbyte = exif_data[8];
+       iso = (ISO_highbyte << 8) | ISO_lowbyte;
 
 	/* EXIF Flash mode */
 	if(g_flash_mode == 0){
@@ -4034,15 +4231,22 @@ void iCatch_get_exif(struct exif_cfg *exif)
 	}else if(g_flash_mode ==1){
 		flash_mode = 1;
 	}else{
-		sensor_read_reg(imx091_s_ctrl.sensor_i2c_client->client, 0x72b9, &flash_mode);
+		flash_mode = exif_data[9];
 	}
-
+    
+       /* EXIF Edge */
+       edge = (exif_data[13]<<24)|(exif_data[12]<<16)|(exif_data[11]<<8)|exif_data[10];
+       //pr_info("(0x%x)(0x%x)(0x%x)(0x%x)\n",exif_data[10],exif_data[11],exif_data[12],exif_data[13]);
+        
 	exif->iso = iso;
 	exif->exp_time_num = et_numerator;
 	exif->exp_time_denom = (et_denominator_byte3 << 16)|(et_denominator_byte2 << 8)|et_denominator_byte1;
 	exif->flash_mode = flash_mode;
+       exif->edge = edge;
 
-	pr_info("[EXIF] ISO(%d), ET(%d/%d), FLASH(%d)\n", exif->iso, exif->exp_time_num, exif->exp_time_denom, exif->flash_mode);
+	if(g_cur_res != MSM_SENSOR_RES_QTR){
+	    pr_info("[EXIF] ISO(%d), ET(%d/%d), FLASH(%d), EDGE(%d)\n", exif->iso, exif->exp_time_num, exif->exp_time_denom, exif->flash_mode,edge);
+    }
 }
 //ASUS_BSP --- Stimber "Implement EXIF info for camera with ISP"
 
@@ -4052,12 +4256,14 @@ void iCatch_init(void)
     single_image = 0;
     g_TAEenable = 0;
     g_is_hdr_on = 0;	//0: Disable, 1:Enable //ASUS_BSP stimber "Implement HDR feature"
+    g_is_nr_on = 0;	//0: Disable, 1:Enable //ASUS_BSP stimber "Implement NR feature"
     is_calibration_table_set = false;    
     g_isAFCancel = false;
     g_isAFDone = true;
     g_LastFixFPS = 0;
     g_LastMaxExp = 0;
     g_LastMiniISO = 0;
+    g_cur_res = MSM_SENSOR_INVALID_RES;
 }
 
 void iCatch_release_sensor(void)

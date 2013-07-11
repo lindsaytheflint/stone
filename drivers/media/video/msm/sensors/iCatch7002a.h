@@ -19,7 +19,8 @@ void create_iCatch_proc_file(void);
 void iCatch_init(void);
 void iCatch_release_sensor(void);
 void wait_for_AWB_ready(void);
-
+void iCatch_enable_exif(bool enable, bool is_preExif);
+    
 void iCatch_start_AF(bool on, isp3a_af_mode_t mode, int16_t coordinate_x, int16_t coordinate_y, int16_t rectangle_h, int16_t rectangle_w);
 uint16_t iCatch_get_AF_result(struct msm_sensor_ctrl_t *s_ctrl);
 void iCatch_set_led_mode(led_mode_t mode);  //ASUS_BSP LiJen "[A68][13M][NA][Others]implement LED/Flash mode"
@@ -35,6 +36,7 @@ void iCatch_set_effect_mode(int16_t mode); //ASUS_BSP LiJen "[A68][13M][NA][Othe
 void iCatch_set_aura_value(int16_t mode); //ASUS_BSP LiJen "[A68][13M][NA][Others]implement AURA mode"
 void iCatch_checkAFMode(void);
 void iCatch_get_exif(struct exif_cfg *exif);	//ASUS_BSP Stimber "Implement EXIF info for camera with ISP"
+bool iCatch_exif_flow_control(void);	//ASUS_BSP Stimber "Add for preview info control"
 void iCatch_set_general_cmd(struct general_cmd_cfg *cmd);
 void iCatch_get_general_cmd(struct general_cmd_cfg *cmd);
 

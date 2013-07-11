@@ -16,6 +16,7 @@
 #ifdef MSM_CAMERA_BIONIC
 #include <sys/types.h>
 #endif
+#include <linux/videodev2.h>
 #include <linux/types.h>
 #include <linux/ioctl.h>
 #ifdef __KERNEL__
@@ -248,6 +249,8 @@ struct msm_mctl_post_proc_cmd {
 
 /* Should be same as VIDEO_MAX_PLANES in videodev2.h */
 #define MAX_PLANES 8
+
+#define FRAME_PERIOD    10		//ASUS_BSP Stimber "Add for preview info control"
 
 /*****************************************************
  *  structure
@@ -624,6 +627,7 @@ struct msm_frame {
 	struct ion_allocation_data ion_alloc;
 	struct ion_fd_data fd_data;
 	int ion_dev_fd;
+    struct exif_cfg JpegExif;	//ASUS_BSP Stimber "Insert EXIF info each frame"
 };
 
 enum msm_st_frame_packing {
@@ -1378,15 +1382,6 @@ struct msm_eeprom_data_t {
 	uint16_t index;
 };
 
-//ASUS_BSP +++ Stimber "Implement EXIF info for camera with ISP"
-struct exif_cfg {
-      uint16_t iso;
-      uint32_t exp_time_num;    // Numerator
-      uint32_t exp_time_denom;  // Denominator
-      uint16_t flash_mode;
-};
-//ASUS_BSP --- Stimber "Implement EXIF info for camera with ISP"
-
 //ASUS_BSP +++ LiJen "[A68][13M][NA][Others]implement general command"
 enum general_cmd_id_type {
     GENERAL_CMD_WDR,
@@ -1395,6 +1390,7 @@ enum general_cmd_id_type {
     GENERAL_CMD_TAE,
     GENERAL_CMD_GET_FLASH_STATUS,
     GENERAL_CMD_FIX_FPS,
+    GENERAL_CMD_NR,
     GENERAL_CMD_MAX,
 };
 
